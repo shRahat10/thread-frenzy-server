@@ -96,4 +96,67 @@ const Tshirt = mongoose.model('Tshirt', tshirtSchema);
 
 
 //TODO: CRUD Operations
+app.get('/t-shirt', async (req, res) => {
+    try {
+        const tshirt = await Tshirt.find();
+        res.send(tshirt);
+    }
+    catch (error) {
+        res.status(500).send({
+            success: false,
+            error: error.message
+        });
+    }
+});
 
+app.post('/t-shirt', async (req, res) => {
+    try {
+        const newTshirt = new Tshirt(req.body);
+        const result = await newTshirt.save();
+        res.send(result);
+    }
+    catch (error) {
+        res.status(500).send({
+            success: false,
+            error: error.message
+        });
+    }
+});
+
+app.put('/t-shirt/:id', async (req, res) => {
+    try {
+        const id = req.params.id;
+        const updatedTshirt = req.body;
+        const result = await Tshirt.findByIdAndUpdate(id,
+            {
+                $set: updatedTshirt
+            },
+            {
+                new: true,
+                upsert: true
+            }
+        );
+
+        res.send(result);
+    }
+    catch (error) {
+        res.status(500).send({
+            success: false,
+            error: error.message
+        });
+    }
+});
+
+app.delete('/t-shirt/:id', async (req, res) => {
+    try {
+        const id = req.params.id;
+        const result = await Tshirt.findByIdAndDelete(id);
+        res.send(result);
+    }
+    catch (error) {
+        res.status(500).send({
+            success: false,
+            error: error.message
+        });
+    }
+});
