@@ -57,45 +57,34 @@ const cookieOptions = {
 };
 //Define Schemas
 const tshirtSchema = new mongoose.Schema({
-    name: {
-        type: String
-    },
-    brand: {
-        type: String
-    },
-    gender: {
-        type: String
-    },
-    rating: {
-        type: Number
-    },
-    price: {
-        type: Number
-    },
-    size: {
-        type: Array
-    },
-    about_product: {
-        type: String
-    },
-    details: {
-        type: String
-    },
-    color: {
-        type: String
-    },
-    images: {
-        type: Object
-    }
+    name: { type: String, required: true },
+    brand: { type: String, required: true },
+    gender: { type: String, required: true },
+    rating: { type: Number, required: true },
+    price: { type: Number, required: true },
+    size: { type: Array, required: true },
+    about_product: { type: String, required: true },
+    details: { type: Array, required: true },
+    color: { type: Array, required: true },
+    images: { type: Object, required: true }
+})
+
+const cartSchema = new mongoose.Schema({
+    userId: { type: String, required: true },
+    productId: { type: String, required: true },
+    name: { type: String, required: true },
+    price: { type: Number, required: true },
+    color: { type: String, required: true },
+    quantity: { type: Number, required: true },
 })
 
 //Define Models
 const Tshirt = mongoose.model('Tshirt', tshirtSchema);
+const Cart = mongoose.model('Cart', cartSchema);
 
 //TODO: JWT Routes
 
-
-//TODO: CRUD Operations
+// Data CRUD Operations
 app.get('/t-shirt', async (req, res) => {
     try {
         const tshirt = await Tshirt.find();
@@ -106,6 +95,19 @@ app.get('/t-shirt', async (req, res) => {
             success: false,
             error: error.message
         });
+    }
+});
+
+app.get('/t-shirt/:id', async (req, res) => {
+    try {
+        const id = req.params.id;
+        const tshirt = await Tshirt.findById(id);
+        if (!tshirt) {
+            return res.status(404).send({ success: false, error: 'T-shirt not found' });
+        }
+        res.send(tshirt);
+    } catch (error) {
+        res.status(500).send({ success: false, error: error.message });
     }
 });
 
@@ -158,5 +160,54 @@ app.delete('/t-shirt/:id', async (req, res) => {
             success: false,
             error: error.message
         });
+    }
+});
+
+// Cart CRUD Operations
+app.get('/cart/:userId', async (req, res) => {
+    try {
+        const cartItems = await Cart.find({ userId: req.params.userId })
+        res.send(cartItems);
+    }
+    catch (error) {
+        res.status(500).send({ success: false, error: error.message });
+    }
+});
+
+app.post('/cart', async (req, res) => {
+    try {
+        const newCartItem = new Cart(req.body);
+        const result = await newCartItem.save();
+        res.send(result);
+    }
+    catch (error) {
+        res.status(500).send({ success: false, error: error.message });
+    }
+});
+
+app.put('/cart/:id', async (req, res) => {
+    try {
+        const id = req.params.id;
+        const updatedCartItem = req.body;
+        const result = await Cart.findByIdAndDelete(
+            id, 
+            { $set: updatedCartItem },
+            { new: true, upsert: true }
+        );
+        res.send(result);
+    }
+    catch (error) {
+        res.status(500).send({ success: false, error: error.message });
+    }
+});
+
+app.delete('/cart/:id', async (req, res) => {
+    try {
+        const id = req.params.id;
+        const result = await Cart.findByIdAndDelete(id);
+        res.send(result);
+    }
+    catch (error) {
+        res.status(500).send({ success: false, error: error.message });
     }
 });
