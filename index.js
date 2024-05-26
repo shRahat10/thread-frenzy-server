@@ -70,12 +70,13 @@ const tshirtSchema = new mongoose.Schema({
 })
 
 const cartSchema = new mongoose.Schema({
-    userId: { type: String, required: true },
-    productId: { type: String, required: true },
+    id: { type: String, required: true },
     name: { type: String, required: true },
     price: { type: Number, required: true },
     color: { type: String, required: true },
+    size: { type: String, require: true },
     quantity: { type: Number, required: true },
+    userEmail: { type: String, required: true },
 })
 
 //Define Models
@@ -164,12 +165,12 @@ app.delete('/t-shirt/:id', async (req, res) => {
 });
 
 // Cart CRUD Operations
-app.get('/cart/:userId', async (req, res) => {
+app.get('/cart/:userEmail', async (req, res) => {
     try {
-        const cartItems = await Cart.find({ userId: req.params.userId })
+        const cartItems = await Cart.find({ userEmail: req.params.userEmail });
         res.send(cartItems);
-    }
-    catch (error) {
+    } catch (error) {
+        console.error(error);
         res.status(500).send({ success: false, error: error.message });
     }
 });
@@ -179,8 +180,8 @@ app.post('/cart', async (req, res) => {
         const newCartItem = new Cart(req.body);
         const result = await newCartItem.save();
         res.send(result);
-    }
-    catch (error) {
+    } catch (error) {
+        console.error(error);
         res.status(500).send({ success: false, error: error.message });
     }
 });
@@ -189,14 +190,14 @@ app.put('/cart/:id', async (req, res) => {
     try {
         const id = req.params.id;
         const updatedCartItem = req.body;
-        const result = await Cart.findByIdAndDelete(
-            id, 
+        const result = await Cart.findByIdAndUpdate(
+            id,
             { $set: updatedCartItem },
             { new: true, upsert: true }
         );
         res.send(result);
-    }
-    catch (error) {
+    } catch (error) {
+        console.error(error);
         res.status(500).send({ success: false, error: error.message });
     }
 });
@@ -206,8 +207,8 @@ app.delete('/cart/:id', async (req, res) => {
         const id = req.params.id;
         const result = await Cart.findByIdAndDelete(id);
         res.send(result);
-    }
-    catch (error) {
+    } catch (error) {
+        console.error(error);
         res.status(500).send({ success: false, error: error.message });
     }
 });
