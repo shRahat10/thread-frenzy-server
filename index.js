@@ -80,9 +80,16 @@ const cartSchema = new mongoose.Schema({
     userEmail: { type: String, required: true },
 })
 
+const userSchema = new mongoose.Schema({
+    userName: { type: String, required: true },
+    email: { type: String, required: true },
+    photoUrl: { type: String, required: true },
+})
+
 //Define Models
 const Tshirt = mongoose.model('Tshirt', tshirtSchema);
 const Cart = mongoose.model('Cart', cartSchema);
+const User = mongoose.model('User', cartSchema);
 
 //TODO: JWT Routes
 
@@ -211,5 +218,71 @@ app.delete('/cart/:id', async (req, res) => {
     } catch (error) {
         console.error(error);
         res.status(500).send({ success: false, error: error.message });
+    }
+});
+
+// User CRUD Operations
+app.get('/user', async (req, res) => {
+    try {
+        const user = await User.find();
+        res.send(user);
+    }
+    catch (error) {
+        res.status(500).send({
+            success: false,
+            error: error.message
+        });
+    }
+});
+
+app.post('/user', async (req, res) => {
+    try {
+        const newUser = new User(req.body);
+        const result = await newUser.save();
+        res.send(result);
+    }
+    catch (error) {
+        res.status(500).send({
+            success: false,
+            error: error.message
+        });
+    }
+});
+
+app.put('/user/:id', async (req, res) => {
+    try {
+        const id = req.params.id;
+        const updatedUser = req.body;
+        const result = await User.findByIdAndUpdate(id,
+            {
+                $set: updatedUser
+            },
+            {
+                new: true,
+                upsert: true
+            }
+        );
+
+        res.send(result);
+    }
+    catch (error) {
+        res.status(500).send({
+            success: false,
+            error: error.message
+        });
+    }
+});
+
+app.delete('/user/:id', async (req, res) => {
+    try {
+        const id = req.params.id;
+        const result = await User.findByIdAndDelete(id);
+        res.send(result);
+    }
+    catch (error) {
+        res.status(500).send({
+            success: false,
+            error: error.message
+        });
     }
 });
