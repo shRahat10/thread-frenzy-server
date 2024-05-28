@@ -81,7 +81,7 @@ const cartSchema = new mongoose.Schema({
 })
 
 const userSchema = new mongoose.Schema({
-    userName: { type: String, unique: true },
+    firstName: { type: String, unique: true },
     lastName: { type: String, },
     address: { type: String, },
     userEmail: { type: String, unique: true },
