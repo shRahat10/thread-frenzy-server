@@ -82,7 +82,7 @@ const cartSchema = new mongoose.Schema({
 })
 
 const userSchema = new mongoose.Schema({
-    firstName: { type: String, unique: true },
+    firstName: { type: String, },
     lastName: { type: String, },
     address: { type: String, },
     userEmail: { type: String, unique: true },
@@ -91,16 +91,8 @@ const userSchema = new mongoose.Schema({
 })
 
 const wishlistSchema = new mongoose.Schema({
-    name: { type: String, required: true },
-    brand: { type: String, required: true },
-    gender: { type: String, required: true },
-    rating: { type: Number, required: true },
-    price: { type: Number, required: true },
-    size: { type: Array, required: true },
-    about_product: { type: String, required: true },
-    details: { type: Array, required: true },
-    color: { type: Array, required: true },
-    images: { type: Object, required: true }
+    item: { type: String, required: true },
+    userEmail: { type: String, required: true },
 })
 
 //Define Models
@@ -273,12 +265,20 @@ app.post('/user', async (req, res) => {
         res.send(result);
     }
     catch (error) {
-        res.status(500).send({
-            success: false,
-            error: error.message
-        });
+        if (error.code === 11000) {
+            res.status(400).send({
+                success: false,
+                error: error.message
+            });
+        } else {
+            res.status(500).send({
+                success: false,
+                error: error.message
+            });
+        }
     }
 });
+
 
 app.put('/user/:id', async (req, res) => {
     try {
@@ -329,16 +329,36 @@ app.get('/wishlist/:userEmail', async (req, res) => {
     }
 });
 
+app.post('/wishlist', async (req, res) => {
+    try {
+        const newWishlistItem = new Wishlist(req.body);
+        const result = await newWishlistItem.save();
+        res.send(result);
+    } catch (error) {
+        if (error.code === 11000) {
+            res.status(400).send({
+                success: false,
+                error: error.message
+            });
+        } else {
+            res.status(500).send({
+                success: false,
+                error: error.message
+            });
+        }
+    }
+});
+
+
 app.delete('/wishlist/:id', async (req, res) => {
     try {
         const id = req.params.id;
-        const result = await User.findByIdAndDelete(id);
+        const result = await Wishlist.findByIdAndDelete(id);
         res.send(result);
-    }
-    catch (error) {
+    } catch (error) {
         res.status(500).send({
             success: false,
-            error: error.message
+            error: error.message,
         });
     }
 });
