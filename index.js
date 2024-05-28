@@ -78,6 +78,7 @@ const cartSchema = new mongoose.Schema({
     size: { type: String, require: true },
     quantity: { type: Number, required: true },
     userEmail: { type: String, required: true },
+    status: { type: String, required: true },
 })
 
 const userSchema = new mongoose.Schema({
@@ -89,10 +90,24 @@ const userSchema = new mongoose.Schema({
     photoUrl: { type: String },
 })
 
+const wishlistSchema = new mongoose.Schema({
+    name: { type: String, required: true },
+    brand: { type: String, required: true },
+    gender: { type: String, required: true },
+    rating: { type: Number, required: true },
+    price: { type: Number, required: true },
+    size: { type: Array, required: true },
+    about_product: { type: String, required: true },
+    details: { type: Array, required: true },
+    color: { type: Array, required: true },
+    images: { type: Object, required: true }
+})
+
 //Define Models
 const Tshirt = mongoose.model('Tshirt', tshirtSchema);
 const Cart = mongoose.model('Cart', cartSchema);
 const User = mongoose.model('User', userSchema);
+const Wishlist = mongoose.model('Wishlist', wishlistSchema);
 
 //TODO: JWT Routes
 
@@ -290,6 +305,31 @@ app.put('/user/:id', async (req, res) => {
 });
 
 app.delete('/user/:id', async (req, res) => {
+    try {
+        const id = req.params.id;
+        const result = await User.findByIdAndDelete(id);
+        res.send(result);
+    }
+    catch (error) {
+        res.status(500).send({
+            success: false,
+            error: error.message
+        });
+    }
+});
+
+// Wishlist CRUD Operations
+app.get('/wishlist/:userEmail', async (req, res) => {
+    try {
+        const wishlistItems = await Wishlist.find({ userEmail: req.params.userEmail });
+        res.send(wishlistItems);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send({ success: false, error: error.message });
+    }
+});
+
+app.delete('/wishlist/:id', async (req, res) => {
     try {
         const id = req.params.id;
         const result = await User.findByIdAndDelete(id);
