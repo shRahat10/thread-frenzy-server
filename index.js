@@ -81,15 +81,18 @@ const cartSchema = new mongoose.Schema({
 })
 
 const userSchema = new mongoose.Schema({
-    userName: { type: String, required: true },
-    email: { type: String, required: true },
-    photoUrl: { type: String, required: true },
+    userName: { type: String, unique: true },
+    lastName: { type: String, },
+    address: { type: String, },
+    userEmail: { type: String, unique: true },
+    phoneNumber: { type: Number, },
+    photoUrl: { type: String },
 })
 
 //Define Models
 const Tshirt = mongoose.model('Tshirt', tshirtSchema);
 const Cart = mongoose.model('Cart', cartSchema);
-const User = mongoose.model('User', cartSchema);
+const User = mongoose.model('User', userSchema);
 
 //TODO: JWT Routes
 
@@ -225,6 +228,19 @@ app.delete('/cart/:id', async (req, res) => {
 app.get('/user', async (req, res) => {
     try {
         const user = await User.find();
+        res.send(user);
+    }
+    catch (error) {
+        res.status(500).send({
+            success: false,
+            error: error.message
+        });
+    }
+});
+
+app.get('/user/:userEmail', async (req, res) => {
+    try {
+        const user = await User.findOne({ userEmail: req.params.userEmail });
         res.send(user);
     }
     catch (error) {
