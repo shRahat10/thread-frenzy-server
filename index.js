@@ -91,8 +91,8 @@ const userSchema = new mongoose.Schema({
 })
 
 const wishlistSchema = new mongoose.Schema({
-    item: { type: String, required: true },
-    userEmail: { type: String, required: true },
+    itemId: { type: String, required: true },
+    userId: { type: String, required: true },
 })
 
 //Define Models
@@ -260,15 +260,22 @@ app.get('/user/:userEmail', async (req, res) => {
 
 app.post('/user', async (req, res) => {
     try {
+        const existingUser = await User.findOne({ userEmail: req.body.userEmail });
+        if (existingUser) {
+            return res.status(400).send({
+                success: false,
+                error: 'Email already in use'
+            });
+        }
+
         const newUser = new User(req.body);
         const result = await newUser.save();
         res.send(result);
-    }
-    catch (error) {
+    } catch (error) {
         if (error.code === 11000) {
             res.status(400).send({
                 success: false,
-                error: error.message
+                error: 'Duplicate key error: ' + error.message
             });
         } else {
             res.status(500).send({
@@ -278,7 +285,6 @@ app.post('/user', async (req, res) => {
         }
     }
 });
-
 
 app.put('/user/:id', async (req, res) => {
     try {
@@ -319,9 +325,9 @@ app.delete('/user/:id', async (req, res) => {
 });
 
 // Wishlist CRUD Operations
-app.get('/wishlist/:userEmail', async (req, res) => {
+app.get('/wishlist/:userId', async (req, res) => {
     try {
-        const wishlistItems = await Wishlist.find({ userEmail: req.params.userEmail });
+        const wishlistItems = await Wishlist.find({ userId: req.params.userId });
         res.send(wishlistItems);
     } catch (error) {
         console.error(error);
