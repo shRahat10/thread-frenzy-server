@@ -337,24 +337,26 @@ app.get('/wishlist/:userId', async (req, res) => {
 
 app.post('/wishlist', async (req, res) => {
     try {
+        const { itemId, userId } = req.body;
+        const existingWishlistItem = await Wishlist.findOne({ itemId, userId });
+
+        if (existingWishlistItem) {
+            return res.status(400).send({
+                success: false,
+                error: 'Item already exists in the wishlist'
+            });
+        }
+
         const newWishlistItem = new Wishlist(req.body);
         const result = await newWishlistItem.save();
         res.send(result);
     } catch (error) {
-        if (error.code === 11000) {
-            res.status(400).send({
-                success: false,
-                error: error.message
-            });
-        } else {
-            res.status(500).send({
-                success: false,
-                error: error.message
-            });
-        }
+        res.status(500).send({
+            success: false,
+            error: error.message
+        });
     }
 });
-
 
 app.delete('/wishlist/:id', async (req, res) => {
     try {
