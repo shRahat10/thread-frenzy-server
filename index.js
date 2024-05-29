@@ -90,15 +90,17 @@ const userSchema = new mongoose.Schema({
     photoUrl: { type: String },
 })
 
-const wishlistSchema = new mongoose.Schema({
-    itemId: { type: String, required: true },
-    userId: { type: String, required: true },
-})
-
 //Define Models
 const Tshirt = mongoose.model('Tshirt', tshirtSchema);
 const Cart = mongoose.model('Cart', cartSchema);
 const User = mongoose.model('User', userSchema);
+
+// Populate Schemas
+const wishlistSchema = new mongoose.Schema({
+    itemId: { type: mongoose.Schema.Types.ObjectId, ref: "Tshirt" },
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+})
+
 const Wishlist = mongoose.model('Wishlist', wishlistSchema);
 
 //TODO: JWT Routes
@@ -327,7 +329,10 @@ app.delete('/user/:id', async (req, res) => {
 // Wishlist CRUD Operations
 app.get('/wishlist/:userId', async (req, res) => {
     try {
-        const wishlistItems = await Wishlist.find({ userId: req.params.userId });
+        const wishlistItems = await Wishlist.find({ userId: req.params.userId })
+            .populate('userId')
+            .populate('itemId');
+
         res.send(wishlistItems);
     } catch (error) {
         console.error(error);
@@ -338,8 +343,24 @@ app.get('/wishlist/:userId', async (req, res) => {
 app.post('/wishlist', async (req, res) => {
     try {
         const { itemId, userId } = req.body;
-        const existingWishlistItem = await Wishlist.findOne({ itemId, userId });
+        const tshirtExists = await Tshirt.findById(itemId);
 
+        if (!tshirtExists) {
+            return res.status(400).send({
+                success: false,
+                error: 'Tshirt not found'
+            });
+        }
+
+        const userExists = await User.findById(userId);
+        if (!userExists) {
+            return res.status(400).send({
+                success: false,
+                error: 'User not found'
+            });
+        }
+
+        const existingWishlistItem = await Wishlist.findOne({ itemId, userId });
         if (existingWishlistItem) {
             return res.status(400).send({
                 success: false,
@@ -347,16 +368,23 @@ app.post('/wishlist', async (req, res) => {
             });
         }
 
-        const newWishlistItem = new Wishlist(req.body);
-        const result = await newWishlistItem.save();
-        res.send(result);
+        const newWishlistItem = new Wishlist({ itemId, userId });
+        await newWishlistItem.save();
+
+        const populatedWishlistItem = await Wishlist.findById(newWishlistItem._id)
+            .populate('itemId')
+            .populate('userId');
+
+        res.send(populatedWishlistItem);
     } catch (error) {
+        console.error(error);
         res.status(500).send({
             success: false,
             error: error.message
         });
     }
 });
+
 
 app.delete('/wishlist/:id', async (req, res) => {
     try {
