@@ -79,6 +79,8 @@ const cartSchema = new mongoose.Schema({
     quantity: { type: Number, required: true },
     userEmail: { type: String, required: true },
     status: { type: String, required: true },
+    date: { type: Date, required: true },
+    transactionId: { type: String, required: true },
 })
 
 const userSchema = new mongoose.Schema({
