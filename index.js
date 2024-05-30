@@ -88,6 +88,7 @@ const userSchema = new mongoose.Schema({
     userEmail: { type: String, unique: true },
     phoneNumber: { type: Number, },
     photoUrl: { type: String },
+    role: { type: String, required: true },
 })
 
 //Define Models
@@ -185,6 +186,16 @@ app.delete('/t-shirt/:id', async (req, res) => {
 });
 
 // Cart CRUD Operations
+app.get('/cart', async (req, res) => {
+    try {
+        const cartItems = await Cart.find();
+        res.send(cartItems);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send({ success: false, error: error.message });
+    }
+});
+
 app.get('/cart/:userEmail', async (req, res) => {
     try {
         const cartItems = await Cart.find({ userEmail: req.params.userEmail });
