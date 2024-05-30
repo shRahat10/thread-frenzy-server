@@ -110,17 +110,39 @@ const Wishlist = mongoose.model('Wishlist', wishlistSchema);
 
 // Data CRUD Operations
 app.get('/t-shirt', async (req, res) => {
-    try {
-        const tshirt = await Tshirt.find();
-        res.send(tshirt);
+    const { brand, price, size, rating } = req.query;
+
+    const filters = {};
+
+    if (brand) {
+        filters.brand = { $in: brand.split(',') };
     }
-    catch (error) {
+
+    if (price) {
+        const [minPrice, maxPrice] = price.split(',').map(Number);
+        filters.price = { $gte: minPrice, $lte: maxPrice };
+    }
+
+    if (size) {
+        filters.size = { $in: size.split(',') };
+    }
+
+    if (rating) {
+        const [minRating, maxRating] = rating.split(',').map(Number);
+        filters.rating = { $gte: minRating, $lte: maxRating };
+    }
+
+    try {
+        const tshirts = await Tshirt.find(filters);
+        res.send(tshirts);
+    } catch (error) {
         res.status(500).send({
             success: false,
             error: error.message
         });
     }
 });
+
 
 app.get('/t-shirt/:id', async (req, res) => {
     try {
