@@ -98,8 +98,10 @@ const paymentSchema = new mongoose.Schema({
     email:  { type: String, },
     price:  { type: String, },
     date:  { type: Date, },
-    cardId:  { type: Array, },
+    cartId:  { type: Array, },
+    productId:  { type: Array, },
     status:  { type: String, },
+    transactionId:  { type: String, },
 })
 
 //Define Models
@@ -277,6 +279,18 @@ app.delete('/cart/:id', async (req, res) => {
         res.status(500).send({ success: false, error: error.message });
     }
 });
+
+app.delete('/cart', async (req, res) => {
+    try {
+        const ids = req.body.ids;
+        const result = await Cart.deleteMany({ _id: { $in: ids } });
+        res.send(result);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send({ success: false, error: error.message });
+    }
+});
+
 
 // User CRUD Operations
 app.get('/user', async (req, res) => {
@@ -465,6 +479,16 @@ app.post('/create-payment-intent', async (req, res) => {
 });
 
 // payment CRUD operations
+app.get('/payment', async (req, res) => {
+    try {
+        const paymentItems = await Payment.find();
+        res.send(paymentItems);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send({ success: false, error: error.message });
+    }
+});
+
 app.post('/payment', async (req, res) => {
     try {
         const newPayment = new Payment(req.body);
@@ -478,3 +502,20 @@ app.post('/payment', async (req, res) => {
         });
     }
 });
+
+app.put('/payment/:id', async (req, res) => {
+    try {
+        const id = req.params.id;
+        const updatedPaymentItem = req.body;
+        const result = await Payment.findByIdAndUpdate(
+            id,
+            { $set: updatedPaymentItem },
+            { new: true, upsert: true }
+        );
+        res.send(result);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send({ success: false, error: error.message });
+    }
+});
+
