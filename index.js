@@ -95,12 +95,12 @@ const userSchema = new mongoose.Schema({
 })
 
 const paymentSchema = new mongoose.Schema({
-    email:  { type: String, },
-    price:  { type: String, },
-    date:  { type: Date, },
+    email: { type: String, },
+    price: { type: String, },
+    date: { type: Date, },
     orderedItems: { type: Object, },
-    status:  { type: String, },
-    transactionId:  { type: String, },
+    status: { type: String, },
+    transactionId: { type: String, },
 })
 
 //Define Models
@@ -121,7 +121,7 @@ const Wishlist = mongoose.model('Wishlist', wishlistSchema);
 
 // Data CRUD Operations
 app.get('/t-shirt', async (req, res) => {
-    const { brand, price, size, rating } = req.query;
+    const { brand, price, size, rating, gender, sort } = req.query;
 
     const filters = {};
 
@@ -143,8 +143,15 @@ app.get('/t-shirt', async (req, res) => {
         filters.rating = { $gte: minRating, $lte: maxRating };
     }
 
+    if (gender) {
+        filters.gender = gender;
+    }
+
+    const sortOrder = sort === 'desc' ? -1 : 1;
+    const sortField = sort ? { price: sortOrder } : {};
+
     try {
-        const tshirts = await Tshirt.find(filters);
+        const tshirts = await Tshirt.find(filters).sort(sortField);
         res.send(tshirts);
     } catch (error) {
         res.status(500).send({
@@ -153,6 +160,7 @@ app.get('/t-shirt', async (req, res) => {
         });
     }
 });
+
 
 
 app.get('/t-shirt/:id', async (req, res) => {
