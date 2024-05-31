@@ -1,10 +1,11 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 const { Double } = require('mongodb');
-require('dotenv').config();
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -93,10 +94,19 @@ const userSchema = new mongoose.Schema({
     role: { type: String, required: true },
 })
 
+const paymentSchema = new mongoose.Schema({
+    email:  { type: String, },
+    price:  { type: String, },
+    date:  { type: Date, },
+    cardId:  { type: Array, },
+    status:  { type: String, },
+})
+
 //Define Models
 const Tshirt = mongoose.model('Tshirt', tshirtSchema);
 const Cart = mongoose.model('Cart', cartSchema);
 const User = mongoose.model('User', userSchema);
+const Payment = mongoose.model('Payment', paymentSchema);
 
 // Populate Schemas
 const wishlistSchema = new mongoose.Schema({
@@ -430,6 +440,41 @@ app.delete('/wishlist/:id', async (req, res) => {
         res.status(500).send({
             success: false,
             error: error.message,
+        });
+    }
+});
+
+// payment intent
+app.post('/create-payment-intent', async (req, res) => {
+    const { price } = req.body;
+    const amount = parseInt(price * 100);
+
+    try {
+        const paymentIntent = await stripe.paymentIntents.create({
+            amount: amount,
+            currency: 'usd',
+            payment_method_types: ['card']
+        });
+
+        res.send({
+            clientSecret: paymentIntent.client_secret
+        });
+    } catch (error) {
+        res.status(500).send({ error: error.message });
+    }
+});
+
+// payment CRUD operations
+app.post('/payment', async (req, res) => {
+    try {
+        const newPayment = new Payment(req.body);
+        const result = await newPayment.save();
+        res.send(result);
+    }
+    catch (error) {
+        res.status(500).send({
+            success: false,
+            error: error.message
         });
     }
 });
