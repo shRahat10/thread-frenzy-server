@@ -354,18 +354,13 @@ app.post('/user', async (req, res) => {
     }
 });
 
-app.put('/user/:id', async (req, res) => {
+app.patch('/user/:id', async (req, res) => {
     try {
         const id = req.params.id;
         const updatedUser = req.body;
-        const result = await User.findByIdAndUpdate(id,
-            {
-                $set: updatedUser
-            },
-            {
-                new: true,
-                upsert: true
-            }
+        const result = await User.findByIdAndUpdate(id, 
+            { $set: updatedUser }, 
+            { new: true }
         );
 
         res.send(result);
