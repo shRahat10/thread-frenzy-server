@@ -358,8 +358,8 @@ app.patch('/user/:id', async (req, res) => {
     try {
         const id = req.params.id;
         const updatedUser = req.body;
-        const result = await User.findByIdAndUpdate(id, 
-            { $set: updatedUser }, 
+        const result = await User.findByIdAndUpdate(id,
+            { $set: updatedUser },
             { new: true }
         );
 
@@ -484,6 +484,16 @@ app.post('/create-payment-intent', async (req, res) => {
 app.get('/payment', async (req, res) => {
     try {
         const paymentItems = await Payment.find();
+        res.send(paymentItems);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send({ success: false, error: error.message });
+    }
+});
+
+app.get('/payment/:email', async (req, res) => {
+    try {
+        const paymentItems = await Payment.find({ email: req.params.email });
         res.send(paymentItems);
     } catch (error) {
         console.error(error);
