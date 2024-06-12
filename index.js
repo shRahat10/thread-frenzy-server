@@ -105,9 +105,11 @@ const paymentSchema = new mongoose.Schema({
 
 const productReviewSchema = new mongoose.Schema({
     productId: { type: String, required: true },
+    userEmail: { type: String, required: true },
     userName: { type: String, required: true },
     review: { type: String, required: true },
     rating: { type: Number },
+    date: { type: Date, default: Date.now }
 })
 
 //Define Models
