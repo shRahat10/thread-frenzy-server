@@ -103,11 +103,19 @@ const paymentSchema = new mongoose.Schema({
     transactionId: { type: String, },
 })
 
+const productReviewSchema = new mongoose.Schema({
+    productId: { type: String, required: true },
+    userName: { type: String, required: true },
+    review: { type: String, required: true },
+    rating: { type: Number },
+})
+
 //Define Models
 const Tshirt = mongoose.model('Tshirt', tshirtSchema);
 const Cart = mongoose.model('Cart', cartSchema);
 const User = mongoose.model('User', userSchema);
 const Payment = mongoose.model('Payment', paymentSchema);
+const Review = mongoose.model('Review', productReviewSchema);
 
 // Populate Schemas
 const wishlistSchema = new mongoose.Schema({
@@ -446,7 +454,6 @@ app.post('/wishlist', async (req, res) => {
     }
 });
 
-
 app.delete('/wishlist/:id', async (req, res) => {
     try {
         const id = req.params.id;
@@ -531,3 +538,56 @@ app.put('/payment/:id', async (req, res) => {
     }
 });
 
+// product review CRUD operations
+app.get('/review/:productId', async (req, res) => {
+    try {
+        const reviews = await Review.find({ productId: req.params.productId });
+        res.send(reviews);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send({ success: false, error: error.message });
+    }
+});
+
+app.post('/review', async (req, res) => {
+    try {
+        const newReview = new Review(req.body);
+        const result = await newReview.save();
+        res.send(result);
+    }
+    catch (error) {
+        res.status(500).send({
+            success: false,
+            error: error.message
+        });
+    }
+});
+
+app.put('/review/:id', async (req, res) => {
+    try {
+        const id = req.params.id;
+        const updatedReview = req.body;
+        const result = await Review.findByIdAndUpdate(
+            id,
+            { $set: updatedReview },
+            { new: true, upsert: true }
+        );
+        res.send(result);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send({ success: false, error: error.message });
+    }
+});
+
+app.delete('/review/:id', async (req, res) => {
+    try {
+        const id = req.params.id;
+        const result = await Review.findByIdAndDelete(id);
+        res.send(result);
+    } catch (error) {
+        res.status(500).send({
+            success: false,
+            error: error.message,
+        });
+    }
+});
