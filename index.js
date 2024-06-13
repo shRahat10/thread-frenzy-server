@@ -112,12 +112,19 @@ const productReviewSchema = new mongoose.Schema({
     date: { type: Date, default: Date.now }
 })
 
+const messageSchema = new mongoose.Schema({
+    email: { type: String, required: true },
+    message: { type: String, required: true },
+    date: { type: Date, default: Date.now }
+})
+
 //Define Models
 const Tshirt = mongoose.model('Tshirt', tshirtSchema);
 const Cart = mongoose.model('Cart', cartSchema);
 const User = mongoose.model('User', userSchema);
 const Payment = mongoose.model('Payment', paymentSchema);
 const Review = mongoose.model('Review', productReviewSchema);
+const Message = mongoose.model('Message', messageSchema);
 
 // Populate Schemas
 const wishlistSchema = new mongoose.Schema({
@@ -593,3 +600,29 @@ app.delete('/review/:id', async (req, res) => {
         });
     }
 });
+
+// contact us CRUD operations
+app.get('/contact-us', async (req, res) => {
+    try {
+        const messages = await Message.find();
+        res.send(messages);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send({ success: false, error: error.message });
+    }
+});
+
+app.post('/contact-us', async (req, res) => {
+    try {
+        const newMessage = new Message(req.body);
+        const result = await newMessage.save();
+        res.send(result);
+    }
+    catch (error) {
+        res.status(500).send({
+            success: false,
+            error: error.message
+        });
+    }
+});
+
