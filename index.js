@@ -670,7 +670,7 @@ app.get('/contact-us', verifyToken('admin'), async (req, res) => {
     }
 });
 
-app.post('/contact-us', verifyToken(), async (req, res) => {
+app.post('/contact-us', async (req, res) => {
     try {
         const newMessage = new Message(req.body);
         const result = await newMessage.save();
