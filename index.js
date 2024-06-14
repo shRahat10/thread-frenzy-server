@@ -29,6 +29,7 @@ const logger = (req, res, next) => {
 
 const verifyToken = (role) => (req, res, next) => {
     const token = req.cookies.jwt;
+    // console.log("verify token: ", token);
 
     if (!token) {
         return res.status(401).send({ message: 'Unauthorized access' });
