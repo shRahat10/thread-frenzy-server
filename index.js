@@ -27,7 +27,7 @@ const logger = (req, res, next) => {
     next();
 };
 
-const verifyToken = (req, res, next) => {
+const verifyToken = (role) => (req, res, next) => {
     const token = req.cookies.jwt;
 
     if (!token) {
@@ -220,7 +220,7 @@ app.get('/t-shirt', async (req, res) => {
 
 
 
-app.get('/t-shirt/:id', async (req, res) => {
+app.get('/t-shirt/:id', verifyToken(), async (req, res) => {
     try {
         const id = req.params.id;
         const tshirt = await Tshirt.findById(id);
@@ -233,7 +233,7 @@ app.get('/t-shirt/:id', async (req, res) => {
     }
 });
 
-app.post('/t-shirt', async (req, res) => {
+app.post('/t-shirt', verifyToken('admin'), async (req, res) => {
     try {
         const newTshirt = new Tshirt(req.body);
         const result = await newTshirt.save();
@@ -247,7 +247,7 @@ app.post('/t-shirt', async (req, res) => {
     }
 });
 
-app.put('/t-shirt/:id', async (req, res) => {
+app.put('/t-shirt/:id', verifyToken('admin'), async (req, res) => {
     try {
         const id = req.params.id;
         const updatedTshirt = req.body;
@@ -271,7 +271,7 @@ app.put('/t-shirt/:id', async (req, res) => {
     }
 });
 
-app.delete('/t-shirt/:id', async (req, res) => {
+app.delete('/t-shirt/:id', verifyToken('admin'), async (req, res) => {
     try {
         const id = req.params.id;
         const result = await Tshirt.findByIdAndDelete(id);
@@ -286,7 +286,7 @@ app.delete('/t-shirt/:id', async (req, res) => {
 });
 
 // Cart CRUD Operations
-app.get('/cart', async (req, res) => {
+app.get('/cart', verifyToken(), async (req, res) => {
     try {
         const cartItems = await Cart.find();
         res.send(cartItems);
@@ -296,7 +296,7 @@ app.get('/cart', async (req, res) => {
     }
 });
 
-app.get('/cart/:userEmail', async (req, res) => {
+app.get('/cart/:userEmail', verifyToken(), async (req, res) => {
     try {
         const cartItems = await Cart.find({ userEmail: req.params.userEmail });
         res.send(cartItems);
@@ -306,7 +306,7 @@ app.get('/cart/:userEmail', async (req, res) => {
     }
 });
 
-app.post('/cart', async (req, res) => {
+app.post('/cart', verifyToken(), async (req, res) => {
     try {
         const newCartItem = new Cart(req.body);
         const result = await newCartItem.save();
@@ -317,7 +317,7 @@ app.post('/cart', async (req, res) => {
     }
 });
 
-app.put('/cart/:id', async (req, res) => {
+app.put('/cart/:id', verifyToken(), async (req, res) => {
     try {
         const id = req.params.id;
         const updatedCartItem = req.body;
@@ -333,7 +333,7 @@ app.put('/cart/:id', async (req, res) => {
     }
 });
 
-app.delete('/cart/:id', async (req, res) => {
+app.delete('/cart/:id', verifyToken(), async (req, res) => {
     try {
         const id = req.params.id;
         const result = await Cart.findByIdAndDelete(id);
@@ -344,7 +344,7 @@ app.delete('/cart/:id', async (req, res) => {
     }
 });
 
-app.delete('/cart', async (req, res) => {
+app.delete('/cart', verifyToken(), async (req, res) => {
     try {
         const ids = req.body.ids;
         const result = await Cart.deleteMany({ _id: { $in: ids } });
@@ -369,7 +369,7 @@ app.get('/user', verifyToken('admin'), async (req, res) => {
     }
 });
 
-app.get('/user/:userEmail', async (req, res) => {
+app.get('/user/:userEmail', verifyToken(), async (req, res) => {
     try {
         const user = await User.findOne({ userEmail: req.params.userEmail });
         res.send(user);
@@ -410,7 +410,7 @@ app.post('/user', async (req, res) => {
     }
 });
 
-app.patch('/user/:id', async (req, res) => {
+app.patch('/user/:id', verifyToken(), async (req, res) => {
     try {
         const id = req.params.id;
         const updatedUser = req.body;
@@ -429,7 +429,7 @@ app.patch('/user/:id', async (req, res) => {
     }
 });
 
-app.delete('/user/:id', async (req, res) => {
+app.delete('/user/:id', verifyToken('admin'), async (req, res) => {
     try {
         const id = req.params.id;
         const result = await User.findByIdAndDelete(id);
@@ -444,7 +444,7 @@ app.delete('/user/:id', async (req, res) => {
 });
 
 // Wishlist CRUD Operations
-app.get('/wishlist/:userId', async (req, res) => {
+app.get('/wishlist/:userId', verifyToken(), async (req, res) => {
     try {
         const wishlistItems = await Wishlist.find({ userId: req.params.userId })
             .populate('userId')
@@ -457,7 +457,7 @@ app.get('/wishlist/:userId', async (req, res) => {
     }
 });
 
-app.post('/wishlist', async (req, res) => {
+app.post('/wishlist', verifyToken(), async (req, res) => {
     try {
         const { itemId, userId } = req.body;
         const tshirtExists = await Tshirt.findById(itemId);
@@ -502,7 +502,7 @@ app.post('/wishlist', async (req, res) => {
     }
 });
 
-app.delete('/wishlist/:id', async (req, res) => {
+app.delete('/wishlist/:id', verifyToken(), async (req, res) => {
     try {
         const id = req.params.id;
         const result = await Wishlist.findByIdAndDelete(id);
@@ -536,7 +536,7 @@ app.post('/create-payment-intent', async (req, res) => {
 });
 
 // payment CRUD operations
-app.get('/payment', async (req, res) => {
+app.get('/payment', verifyToken('admin'), async (req, res) => {
     try {
         const paymentItems = await Payment.find();
         res.send(paymentItems);
@@ -546,7 +546,7 @@ app.get('/payment', async (req, res) => {
     }
 });
 
-app.get('/payment/:email', async (req, res) => {
+app.get('/payment/:email', verifyToken(), async (req, res) => {
     try {
         const paymentItems = await Payment.find({ email: req.params.email });
         res.send(paymentItems);
@@ -556,7 +556,7 @@ app.get('/payment/:email', async (req, res) => {
     }
 });
 
-app.post('/payment', async (req, res) => {
+app.post('/payment', verifyToken(), async (req, res) => {
     try {
         const newPayment = new Payment(req.body);
         const result = await newPayment.save();
@@ -570,7 +570,7 @@ app.post('/payment', async (req, res) => {
     }
 });
 
-app.put('/payment/:id', async (req, res) => {
+app.put('/payment/:id', verifyToken('admin'), async (req, res) => {
     try {
         const id = req.params.id;
         const updatedPaymentItem = req.body;
@@ -587,7 +587,7 @@ app.put('/payment/:id', async (req, res) => {
 });
 
 // product review CRUD operations
-app.get('/review/:productId', async (req, res) => {
+app.get('/review/:productId', verifyToken(), async (req, res) => {
     try {
         const reviews = await Review.find({ productId: req.params.productId });
         res.send(reviews);
@@ -597,7 +597,7 @@ app.get('/review/:productId', async (req, res) => {
     }
 });
 
-app.post('/review', async (req, res) => {
+app.post('/review', verifyToken(), async (req, res) => {
     try {
         const newReview = new Review(req.body);
         const result = await newReview.save();
@@ -611,7 +611,7 @@ app.post('/review', async (req, res) => {
     }
 });
 
-app.put('/review/:id', async (req, res) => {
+app.put('/review/:id', verifyToken(), async (req, res) => {
     try {
         const id = req.params.id;
         const updatedReview = req.body;
@@ -627,7 +627,7 @@ app.put('/review/:id', async (req, res) => {
     }
 });
 
-app.delete('/review/:id', async (req, res) => {
+app.delete('/review/:id', verifyToken(), async (req, res) => {
     try {
         const id = req.params.id;
         const result = await Review.findByIdAndDelete(id);
@@ -641,7 +641,7 @@ app.delete('/review/:id', async (req, res) => {
 });
 
 // contact us CRUD operations
-app.get('/contact-us', async (req, res) => {
+app.get('/contact-us', verifyToken('admin'), async (req, res) => {
     try {
         const messages = await Message.find();
         res.send(messages);
@@ -651,7 +651,7 @@ app.get('/contact-us', async (req, res) => {
     }
 });
 
-app.post('/contact-us', async (req, res) => {
+app.post('/contact-us', verifyToken(), async (req, res) => {
     try {
         const newMessage = new Message(req.body);
         const result = await newMessage.save();
