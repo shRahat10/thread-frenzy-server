@@ -28,7 +28,22 @@ const logger = (req, res, next) => {
 };
 
 const verifyToken = (req, res, next) => {
+    const token = req.cookies.jwt;
 
+    if (!token) {
+        return res.status(401).send({ message: 'Unauthorized access' });
+    }
+
+    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
+        if (err) {
+            return res.status(401).send({ message: 'Unauthorized access' });
+        }
+        req.user = decoded;
+        if (role && role !== decoded.role) {
+            return res.status(403).send({ message: 'Unauthorized access' });
+        }
+        next();
+    });
 };
 
 app.get('/', (req, res) => {
@@ -56,6 +71,7 @@ const cookieOptions = {
     secure: process.env.NODE_ENV === "production",
     sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
 };
+
 //Define Schemas
 const tshirtSchema = new mongoose.Schema({
     name: { type: String, required: true },
@@ -135,6 +151,30 @@ const wishlistSchema = new mongoose.Schema({
 const Wishlist = mongoose.model('Wishlist', wishlistSchema);
 
 //TODO: JWT Routes
+app.post("/jwt", async (req, res) => {
+    try {
+        const { email } = req.body;
+        const user = await User.findOne({ userEmail: email });
+
+        if (!user) {
+            return res.status(404).send({ message: "User not found" });
+        }
+
+        const token = jwt.sign({ email: user.userEmail, role: user.role }, process.env.ACCESS_TOKEN_SECRET, {
+            expiresIn: '1h'
+        });
+
+        res.cookie('jwt', token, cookieOptions);
+        res.send({ success: true });
+    } catch (error) {
+        res.status(500).send({ success: false, message: error.message });
+    }
+});
+
+app.post("/logout", (req, res) => {
+    res.clearCookie('jwt', cookieOptions);
+    res.send({ success: true });
+});
 
 // Data CRUD Operations
 app.get('/t-shirt', async (req, res) => {
@@ -315,9 +355,8 @@ app.delete('/cart', async (req, res) => {
     }
 });
 
-
 // User CRUD Operations
-app.get('/user', async (req, res) => {
+app.get('/user', verifyToken('admin'), async (req, res) => {
     try {
         const user = await User.find();
         res.send(user);
