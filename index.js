@@ -716,10 +716,10 @@ app.post('/ban-user', verifyToken(), async (req, res) => {
     }
 });
 
-app.delete('/ban-user/:id', verifyToken(), async (req, res) => {
+app.delete('/ban-user/:userEmail', verifyToken(), async (req, res) => {
     try {
-        const id = req.params.id;
-        const result = await BanUser.findByIdAndDelete(id);
+        const userEmail = req.params.userEmail;
+        const result = await BanUser.findOneAndDelete({ userEmail: userEmail });
         res.send(result);
     } catch (error) {
         res.status(500).send({
