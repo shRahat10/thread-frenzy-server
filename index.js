@@ -109,6 +109,7 @@ const userSchema = new mongoose.Schema({
     phoneNumber: { type: Number, },
     photoUrl: { type: String },
     role: { type: String, required: true },
+    status: { type: String, required: true },
 })
 
 const paymentSchema = new mongoose.Schema({
@@ -135,6 +136,11 @@ const messageSchema = new mongoose.Schema({
     date: { type: Date, default: Date.now }
 })
 
+const banUserSchema = new mongoose.Schema({
+    userEmail: { type: String, required: true },
+    date: { type: Date, default: Date.now }
+});
+
 //Define Models
 const Tshirt = mongoose.model('Tshirt', tshirtSchema);
 const Cart = mongoose.model('Cart', cartSchema);
@@ -142,6 +148,7 @@ const User = mongoose.model('User', userSchema);
 const Payment = mongoose.model('Payment', paymentSchema);
 const Review = mongoose.model('Review', productReviewSchema);
 const Message = mongoose.model('Message', messageSchema);
+const BanUser = mongoose.model('BanUser', banUserSchema);
 
 // Populate Schemas
 const wishlistSchema = new mongoose.Schema({
@@ -359,10 +366,21 @@ app.delete('/cart', verifyToken(), async (req, res) => {
 // User CRUD Operations
 app.get('/user', verifyToken('admin'), async (req, res) => {
     try {
-        const user = await User.find();
-        res.send(user);
+        const activeUsers = await User.find({ status: 'active' });
+        res.send(activeUsers);
+    } catch (error) {
+        res.status(500).send({
+            success: false,
+            error: error.message
+        });
     }
-    catch (error) {
+});
+
+app.get('/user/banned', verifyToken('admin'), async (req, res) => {
+    try {
+        const bannedUsers = await User.find({ status: 'banned' });
+        res.send(bannedUsers);
+    } catch (error) {
         res.status(500).send({
             success: false,
             error: error.message
@@ -666,3 +684,47 @@ app.post('/contact-us', verifyToken(), async (req, res) => {
     }
 });
 
+// ban user CRUD operations
+app.get('/ban-user', verifyToken('admin'), async (req, res) => {
+    try {
+        const banUser = await BanUser.find();
+        res.send(banUser);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send({ success: false, error: error.message });
+    }
+});
+
+app.post('/ban-user', verifyToken(), async (req, res) => {
+    try {
+        const existingBanUser = await BanUser.findOne({ userEmail: req.body.userEmail });
+        if (existingBanUser) {
+            return res.status(400).send({
+                success: false,
+                error: 'User already banned'
+            });
+        }
+
+        const newBanUser = new BanUser(req.body);
+        const result = await newBanUser.save();
+        res.send(result);
+    } catch (error) {
+        res.status(500).send({
+            success: false,
+            error: error.message
+        });
+    }
+});
+
+app.delete('/ban-user/:id', verifyToken(), async (req, res) => {
+    try {
+        const id = req.params.id;
+        const result = await BanUser.findByIdAndDelete(id);
+        res.send(result);
+    } catch (error) {
+        res.status(500).send({
+            success: false,
+            error: error.message,
+        });
+    }
+});
