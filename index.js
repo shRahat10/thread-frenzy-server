@@ -685,7 +685,7 @@ app.post('/contact-us', async (req, res) => {
 });
 
 // ban user CRUD operations
-app.get('/ban-user', verifyToken('admin'), async (req, res) => {
+app.get('/ban-user', async (req, res) => {
     try {
         const banUser = await BanUser.find();
         res.send(banUser);
