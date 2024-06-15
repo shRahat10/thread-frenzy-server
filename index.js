@@ -190,7 +190,7 @@ app.post("/logout", (req, res) => {
 
 // Data CRUD Operations
 app.get('/t-shirt', async (req, res) => {
-    const { brand, price, size, rating, gender, sort } = req.query;
+    const { brand, price, size, gender, sort } = req.query;
 
     const filters = {};
 
@@ -205,11 +205,6 @@ app.get('/t-shirt', async (req, res) => {
 
     if (size) {
         filters.size = { $in: size.split(',') };
-    }
-
-    if (rating) {
-        const [minRating, maxRating] = rating.split(',').map(Number);
-        filters.rating = { $gte: minRating, $lte: maxRating };
     }
 
     if (gender) {
