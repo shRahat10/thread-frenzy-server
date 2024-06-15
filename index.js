@@ -84,7 +84,8 @@ const tshirtSchema = new mongoose.Schema({
     about_product: { type: String, required: true },
     details: { type: Array, required: true },
     color: { type: Array, required: true },
-    images: { type: Object, required: true }
+    images: { type: Object, required: true },
+    date: { type: Date, default: Date.now },
 })
 
 const cartSchema = new mongoose.Schema({
@@ -93,12 +94,13 @@ const cartSchema = new mongoose.Schema({
     image: { type: String, required: true },
     price: { type: Number, required: true },
     color: { type: String, required: true },
+    gender: { type: String, required: true },
     size: { type: String, require: true },
     quantity: { type: Number, required: true },
     userEmail: { type: String, required: true },
     status: { type: String, required: true },
-    date: { type: Date, required: true },
     transactionId: { type: String, required: true },
+    date: { type: Date, default: Date.now },
 })
 
 const userSchema = new mongoose.Schema({
@@ -110,15 +112,16 @@ const userSchema = new mongoose.Schema({
     photoUrl: { type: String },
     role: { type: String, required: true },
     status: { type: String, required: true },
+    date: { type: Date, default: Date.now },
 })
 
 const paymentSchema = new mongoose.Schema({
     email: { type: String, },
     price: { type: String, },
-    date: { type: Date, },
     orderedItems: { type: Object, },
     status: { type: String, },
     transactionId: { type: String, },
+    date: { type: Date, default: Date.now },
 })
 
 const productReviewSchema = new mongoose.Schema({
@@ -127,18 +130,18 @@ const productReviewSchema = new mongoose.Schema({
     userName: { type: String, required: true },
     review: { type: String, required: true },
     rating: { type: Number },
-    date: { type: Date, default: Date.now }
+    date: { type: Date, default: Date.now },
 })
 
 const messageSchema = new mongoose.Schema({
     email: { type: String, required: true },
     message: { type: String, required: true },
-    date: { type: Date, default: Date.now }
+    date: { type: Date, default: Date.now },
 })
 
 const banUserSchema = new mongoose.Schema({
     userEmail: { type: String, required: true },
-    date: { type: Date, default: Date.now }
+    date: { type: Date, default: Date.now },
 });
 
 //Define Models
@@ -154,6 +157,7 @@ const BanUser = mongoose.model('BanUser', banUserSchema);
 const wishlistSchema = new mongoose.Schema({
     itemId: { type: mongoose.Schema.Types.ObjectId, ref: "Tshirt" },
     userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    date: { type: Date, default: Date.now },
 })
 
 const Wishlist = mongoose.model('Wishlist', wishlistSchema);
