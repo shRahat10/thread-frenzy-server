@@ -256,7 +256,7 @@ app.post('/t-shirt', verifyToken('admin'), async (req, res) => {
     }
 });
 
-app.put('/t-shirt/:id', verifyToken('admin'), async (req, res) => {
+app.put('/t-shirt/:id', verifyToken(), async (req, res) => {
     try {
         const id = req.params.id;
         const updatedTshirt = req.body;
