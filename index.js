@@ -80,6 +80,8 @@ const tshirtSchema = new mongoose.Schema({
     gender: { type: String, required: true },
     rating: { type: Number, required: true },
     price: { type: Number, required: true },
+    numberOfProduct: { type: Number, required: true },
+    discount: { type: Number, required: true },
     size: { type: Array, required: true },
     about_product: { type: String, required: true },
     details: { type: Array, required: true },
