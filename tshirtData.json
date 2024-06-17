@@ -166,8 +166,8 @@
             "Black Beauty"
         ],
         "quantity": {
-            "": 20,
-            "": 20
+            "Antique White": 20,
+            "Black Beauty": 20
         },
         "images": {
             "Antique White": [
@@ -212,8 +212,8 @@
             "Black Beauty"
         ],
         "quantity": {
-            "": 20,
-            "": 20
+            "Nimbus Cloud": 20,
+            "Black Beauty": 20
         },
         "images": {
             "Nimbus Cloud": [
@@ -256,8 +256,8 @@
             "Black"
         ],
         "quantity": {
-            "": 20,
-            "": 20
+            "White": 20,
+            "Black": 20
         },
         "images": {
             "White": [
@@ -299,8 +299,8 @@
             "Heritage Blue"
         ],
         "quantity": {
-            "": 20,
-            "": 20
+            "Black": 20,
+            "Heritage Blue": 20
         },
         "images": {
             "Black": [
@@ -343,8 +343,8 @@
             "Tiger Eye"
         ],
         "quantity": {
-            "": 20,
-            "": 20
+            "Heathered Canvas": 20,
+            "Tiger Eye": 20
         },
         "images": {
             "Heathered Canvas": [
@@ -387,8 +387,8 @@
             "Black"
         ],
         "quantity": {
-            "": 20,
-            "": 20
+            "White": 20,
+            "Black": 20
         },
         "images": {
             "White": [
@@ -431,8 +431,8 @@
             "Black"
         ],
         "quantity": {
-            "": 20,
-            "": 20
+            "White": 20,
+            "Black": 20
         },
         "images": {
             "White": [
@@ -476,8 +476,8 @@
             "Blue Opal"
         ],
         "quantity": {
-            "": 20,
-            "": 20
+            "Clay": 20,
+            "Blue Opal": 20
         },
         "images": {
             "Clay": [
@@ -523,8 +523,8 @@
             "Solid Grey"
         ],
         "quantity": {
-            "": 20,
-            "": 20
+            "Black": 20,
+            "Solid Grey": 20
         },
         "images": {
             "Black": [
@@ -567,8 +567,8 @@
             "Blue"
         ],
         "quantity": {
-            "": 20,
-            "": 20
+            "White": 20,
+            "Blue": 20
         },
         "images": {
             "White": [
@@ -611,8 +611,8 @@
             "Red"
         ],
         "quantity": {
-            "": 20,
-            "": 20
+            "Black": 20,
+            "Red": 20
         },
         "images": {
             "Black": [
@@ -657,8 +657,8 @@
             "Bold Blue"
         ],
         "quantity": {
-            "": 20,
-            "": 20
+            "Tomato": 20,
+            "Bold Blue": 20
         },
         "images": {
             "Tomato": [
@@ -701,8 +701,7 @@
             "Cloud White"
         ],
         "quantity": {
-            "": 20,
-            "": 20
+            "Cloud White": 20
         },
         "images": {
             "Cloud White": [
@@ -739,8 +738,7 @@
             "Green"
         ],
         "quantity": {
-            "": 20,
-            "": 20
+            "Green": 20
         },
         "images": {
             "Green": [
@@ -780,8 +778,7 @@
             "Olive Green"
         ],
         "quantity": {
-            "": 20,
-            "": 20
+            "Olive Green": 20
         },
         "images": {
             "Olive Green": [
@@ -821,8 +818,8 @@
             "Stripe Salsa Red"
         ],
         "quantity": {
-            "": 20,
-            "": 20
+            "Stripe Heritage Blue": 20,
+            "Stripe Salsa Red": 20
         },
         "images": {
             "Stripe Heritage Blue": [
@@ -868,8 +865,8 @@
             "Pale Peach"
         ],
         "quantity": {
-            "": 20,
-            "": 20
+            "Mineral Black": 20,
+            "Pale Peach": 20
         },
         "images": {
             "Mineral Black": [
@@ -912,8 +909,7 @@
             "Caviar Black"
         ],
         "quantity": {
-            "": 20,
-            "": 20
+            "Caviar Black": 20
         },
         "images": {
             "Caviar Black": [
@@ -950,8 +946,8 @@
             "Black"
         ],
         "quantity": {
-            "": 20,
-            "": 20
+            "White": 20,
+            "Black": 20
         },
         "images": {
             "White": [
@@ -994,8 +990,8 @@
             "Light Blue"
         ],
         "quantity": {
-            "": 20,
-            "": 20
+            "Sea Green": 20,
+            "Light Blue": 20
         },
         "images": {
             "Sea Green": [
@@ -1038,8 +1034,8 @@
             "Blue"
         ],
         "quantity": {
-            "": 20,
-            "": 20
+            "White": 20,
+            "Blue": 20
         },
         "images": {
             "White": [
@@ -1081,8 +1077,8 @@
             "Light Carbon"
         ],
         "quantity": {
-            "": 20,
-            "": 20
+            "Light Armory Blue": 20,
+            "Light Carbon": 20
         },
         "images": {
             "Light Armory Blue": [
@@ -1125,8 +1121,8 @@
             "Playful Pink"
         ],
         "quantity": {
-            "": 20,
-            "": 20
+            "Daybreak Black": 20,
+            "Playful Pink": 20
         },
         "images": {
             "Daybreak Black": [
@@ -1169,8 +1165,7 @@
             "Green"
         ],
         "quantity": {
-            "": 20,
-            "": 20
+            "Green": 20
         },
         "images": {
             "Green": [
@@ -1207,8 +1202,7 @@
             "Navy"
         ],
         "quantity": {
-            "": 20,
-            "": 20
+            "Navy": 20
         },
         "images": {
             "Navy": [
@@ -1244,8 +1238,7 @@
             "Light Blue"
         ],
         "quantity": {
-            "": 20,
-            "": 20
+            "Light Blue": 20
         },
         "images": {
             "Light Blue": [
@@ -1282,8 +1275,7 @@
             "White"
         ],
         "quantity": {
-            "": 20,
-            "": 20
+            "White": 20
         },
         "images": {
             "White": [
@@ -1322,8 +1314,8 @@
             "Black"
         ],
         "quantity": {
-            "": 20,
-            "": 20
+            "Midnight Blue": 20,
+            "Black": 20
         },
         "images": {
             "Midnight Blue": [
@@ -1368,8 +1360,8 @@
             "Black"
         ],
         "quantity": {
-            "": 20,
-            "": 20
+            "White": 20,
+            "Black": 20
         },
         "images": {
             "White": [
@@ -1414,8 +1406,8 @@
             "Pink"
         ],
         "quantity": {
-            "": 20,
-            "": 20
+            "Midnight Blue": 20,
+            "Pink": 20
         },
         "images": {
             "Midnight Blue": [
@@ -1457,8 +1449,7 @@
             "Speckle Grey"
         ],
         "quantity": {
-            "": 20,
-            "": 20
+            "Speckle Grey": 20
         },
         "images": {
             "Speckle Grey": [
@@ -1495,8 +1486,8 @@
             "Dark Olive"
         ],
         "quantity": {
-            "": 20,
-            "": 20
+            "Oat Field": 20,
+            "Dark Olive": 20
         },
         "images": {
             "Oat Field": [
@@ -1539,8 +1530,8 @@
             "Rockaway Sand"
         ],
         "quantity": {
-            "": 20,
-            "": 20
+            "Natural": 20,
+            "Rockaway Sand": 20
         },
         "images": {
             "Natural": [
