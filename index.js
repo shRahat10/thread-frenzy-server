@@ -214,10 +214,96 @@ app.get('/t-shirt', async (req, res) => {
     }
 
     const sortOrder = sort === 'desc' ? -1 : 1;
-    const sortField = sort ? { price: sortOrder } : { date: -1 }; 
+    const sortField = sort ? { price: sortOrder } : { date: -1 };
 
     try {
         const allFilteredItems = await Tshirt.find(filters).sort(sortField);
+
+        const totalItems = allFilteredItems.length;
+        const totalPages = Math.ceil(totalItems / limit);
+
+        const pageInt = parseInt(page);
+        const limitInt = parseInt(limit);
+        const startIndex = (pageInt - 1) * limitInt;
+        const paginatedItems = allFilteredItems.slice(startIndex, startIndex + limitInt);
+
+        res.send({
+            data: paginatedItems,
+            totalItems,
+            totalPages,
+            currentPage: pageInt,
+        });
+    } catch (error) {
+        res.status(500).send({
+            success: false,
+            error: error.message
+        });
+    }
+});
+
+app.get('/t-shirt/men', async (req, res) => {
+    const { brand, price, size, sort, page = 1, limit = 6 } = req.query;
+
+    const filters = { gender: 'Male' };
+
+    if (brand) {
+        filters.brand = { $in: brand.split(',') };
+    }
+
+    if (price) {
+        const [minPrice, maxPrice] = price.split(',').map(Number);
+        filters.price = { $gte: minPrice, $lte: maxPrice };
+    }
+
+    if (size) {
+        filters.size = { $in: size.split(',') };
+    }
+
+    try {
+        const allFilteredItems = await Tshirt.find(filters);
+
+        const totalItems = allFilteredItems.length;
+        const totalPages = Math.ceil(totalItems / limit);
+
+        const pageInt = parseInt(page);
+        const limitInt = parseInt(limit);
+        const startIndex = (pageInt - 1) * limitInt;
+        const paginatedItems = allFilteredItems.slice(startIndex, startIndex + limitInt);
+
+        res.send({
+            data: paginatedItems,
+            totalItems,
+            totalPages,
+            currentPage: pageInt,
+        });
+    } catch (error) {
+        res.status(500).send({
+            success: false,
+            error: error.message
+        });
+    }
+});
+
+app.get('/t-shirt/women', async (req, res) => {
+    const { brand, price, size, sort, page = 1, limit = 6 } = req.query;
+
+    const filters = { gender: 'Female' };
+
+    if (brand) {
+        filters.brand = { $in: brand.split(',') };
+    }
+
+    if (price) {
+        const [minPrice, maxPrice] = price.split(',').map(Number);
+        filters.price = { $gte: minPrice, $lte: maxPrice };
+    }
+
+    if (size) {
+        filters.size = { $in: size.split(',') };
+    }
+
+    try {
+        const allFilteredItems = await Tshirt.find(filters);
 
         const totalItems = allFilteredItems.length;
         const totalPages = Math.ceil(totalItems / limit);
