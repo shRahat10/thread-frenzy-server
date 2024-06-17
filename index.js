@@ -192,7 +192,7 @@ app.post("/logout", (req, res) => {
 
 // Data CRUD Operations
 app.get('/t-shirt', async (req, res) => {
-    const { brand, price, size, gender, sort } = req.query;
+    const { brand, price, size, gender, sort, page = 1, limit = 6 } = req.query;
 
     const filters = {};
 
@@ -214,11 +214,25 @@ app.get('/t-shirt', async (req, res) => {
     }
 
     const sortOrder = sort === 'desc' ? -1 : 1;
-    const sortField = sort ? { price: sortOrder } : {};
+    const sortField = sort ? { price: sortOrder } : { date: -1 }; 
 
     try {
-        const tshirts = await Tshirt.find(filters).sort(sortField);
-        res.send(tshirts);
+        const allFilteredItems = await Tshirt.find(filters).sort(sortField);
+
+        const totalItems = allFilteredItems.length;
+        const totalPages = Math.ceil(totalItems / limit);
+
+        const pageInt = parseInt(page);
+        const limitInt = parseInt(limit);
+        const startIndex = (pageInt - 1) * limitInt;
+        const paginatedItems = allFilteredItems.slice(startIndex, startIndex + limitInt);
+
+        res.send({
+            data: paginatedItems,
+            totalItems,
+            totalPages,
+            currentPage: pageInt,
+        });
     } catch (error) {
         res.status(500).send({
             success: false,
@@ -226,8 +240,6 @@ app.get('/t-shirt', async (req, res) => {
         });
     }
 });
-
-
 
 app.get('/t-shirt/:id', verifyToken(), async (req, res) => {
     try {
