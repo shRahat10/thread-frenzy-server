@@ -4,7 +4,6 @@
         "brand": "Calvin Klein",
         "gender": "Male",
         "rating": 0,
-        "numberOfProduct": 50,
         "discount": 0,
         "price": 39.92,
         "size": [
@@ -27,6 +26,10 @@
             "Fresh Clay",
             "Black"
         ],
+        "quantity": {
+            "Fresh Clay": 20,
+            "Black": 20
+        },
         "images": {
             "Fresh Clay": [
                 "https://calvinklein.scene7.com/is/image/CalvinKlein/21892492_802_main?wid=864&hei=1139&qlt=80%2C0&resMode=sharp2&op_usm=0.9%2C1.0%2C8%2C0&iccEmbed=0&fmt=webp",
@@ -47,7 +50,6 @@
         "brand": "Calvin Klein",
         "gender": "Male",
         "rating": 0,
-        "numberOfProduct": 50,
         "discount": 0,
         "price": 31.20,
         "size": [
@@ -69,6 +71,10 @@
             "Ink",
             "Phantom"
         ],
+        "quantity": {
+            "Ink": 20,
+            "Phantom": 20
+        },
         "images": {
             "Ink": [
                 "https://calvinklein.scene7.com/is/image/CalvinKlein/21892894_411_main?wid=864&hei=1139&qlt=80%2C0&resMode=sharp2&op_usm=0.9%2C1.0%2C8%2C0&iccEmbed=0&fmt=webp",
@@ -89,7 +95,6 @@
         "brand": "Calvin Klein",
         "gender": "Male",
         "rating": 0,
-        "numberOfProduct": 50,
         "discount": 0,
         "price": 47.20,
         "size": [
@@ -114,6 +119,10 @@
             "Capri Rose",
             "White Pepper"
         ],
+        "quantity": {
+            "Capri Rose": 20,
+            "White Pepper": 20
+        },
         "images": {
             "Capri Rose": [
                 "https://calvinklein.scene7.com/is/image/CalvinKlein/21870239_210_main?wid=864&hei=1139&qlt=80%2C0&resMode=sharp2&op_usm=0.9%2C1.0%2C8%2C0&iccEmbed=0&fmt=webp",
@@ -134,7 +143,6 @@
         "brand": "Calvin Klein",
         "gender": "Female",
         "rating": 0,
-        "numberOfProduct": 50,
         "discount": 0,
         "price": 32.62,
         "size": [
@@ -157,6 +165,10 @@
             "Antique White",
             "Black Beauty"
         ],
+        "quantity": {
+            "": 20,
+            "": 20
+        },
         "images": {
             "Antique White": [
                 "https://calvinklein.scene7.com/is/image/CalvinKlein/11179310_100_main?wid=864&hei=1139&qlt=80%2C0&resMode=sharp2&op_usm=0.9%2C1.0%2C8%2C0&iccEmbed=0&fmt=webp",
@@ -177,7 +189,6 @@
         "brand": "Calvin Klein",
         "gender": "Female",
         "rating": 0,
-        "numberOfProduct": 50,
         "discount": 0,
         "price": 31.20,
         "size": [
@@ -200,6 +211,10 @@
             "Nimbus Cloud",
             "Black Beauty"
         ],
+        "quantity": {
+            "": 20,
+            "": 20
+        },
         "images": {
             "Nimbus Cloud": [
                 "https://calvinklein.scene7.com/is/image/CalvinKlein/11179120_020_main?wid=864&hei=1139&qlt=80%2C0&resMode=sharp2&op_usm=0.9%2C1.0%2C8%2C0&iccEmbed=0&fmt=webp",
@@ -220,7 +235,6 @@
         "brand": "Everlane",
         "gender": "Male",
         "rating": 0,
-        "numberOfProduct": 50,
         "discount": 0,
         "price": 40.60,
         "size": [
@@ -241,6 +255,10 @@
             "White",
             "Black"
         ],
+        "quantity": {
+            "": 20,
+            "": 20
+        },
         "images": {
             "White": [
                 "https://media.everlane.com/images/c_fill,w_384,ar_4:5,q_auto,dpr_1.0,f_auto,fl_progressive:steep/i/8ba32466_f02d/mens-hvywt-ovrszd-crew-white",
@@ -261,7 +279,6 @@
         "brand": "Everlane",
         "gender": "Male",
         "rating": 0,
-        "numberOfProduct": 50,
         "discount": 0,
         "price": 27.60,
         "size": [
@@ -281,6 +298,10 @@
             "Black",
             "Heritage Blue"
         ],
+        "quantity": {
+            "": 20,
+            "": 20
+        },
         "images": {
             "Black": [
                 "https://media.everlane.com/images/c_fill,w_384,ar_4:5,q_auto,dpr_1.0,f_auto,fl_progressive:steep/i/1ab3cde5_60f7/mens-essential-organic-crew-uniform-black",
@@ -301,7 +322,6 @@
         "brand": "Everlane",
         "gender": "Male",
         "rating": 0,
-        "numberOfProduct": 50,
         "discount": 0,
         "price": 71.20,
         "size": [
@@ -322,6 +342,10 @@
             "Heathered Canvas",
             "Tiger Eye"
         ],
+        "quantity": {
+            "": 20,
+            "": 20
+        },
         "images": {
             "Heathered Canvas": [
                 "https://media.everlane.com/images/c_fill,w_384,ar_4:5,q_auto,dpr_1.0,f_auto,fl_progressive:steep/i/e25e8650_c81b/mens-no-sweat-polo-heathered-canvas",
@@ -342,7 +366,6 @@
         "brand": "Everlane",
         "gender": "Female",
         "rating": 0,
-        "numberOfProduct": 50,
         "discount": 0,
         "price": 27.20,
         "size": [
@@ -363,6 +386,10 @@
             "White",
             "Black"
         ],
+        "quantity": {
+            "": 20,
+            "": 20
+        },
         "images": {
             "White": [
                 "https://media.everlane.com/images/c_fill,w_384,ar_4:5,q_auto,dpr_1.0,f_auto,fl_progressive:steep/i/7a62ee30_9edd/womens-organic-cotton-slim-v-neck-tee-white",
@@ -383,7 +410,6 @@
         "brand": "Everlane",
         "gender": "Female",
         "rating": 0,
-        "numberOfProduct": 50,
         "discount": 0,
         "price": 31.80,
         "size": [
@@ -404,6 +430,10 @@
             "White",
             "Black"
         ],
+        "quantity": {
+            "": 20,
+            "": 20
+        },
         "images": {
             "White": [
                 "https://media.everlane.com/images/c_fill,w_384,ar_4:5,q_auto,dpr_1.0,f_auto,fl_progressive:steep/i/3315a50b_02fd/womens-organic-cotton-muscle-tee-white",
@@ -424,7 +454,6 @@
         "brand": "Everlane",
         "gender": "Female",
         "rating": 0,
-        "numberOfProduct": 50,
         "discount": 0,
         "price": 27.20,
         "size": [
@@ -446,6 +475,10 @@
             "Clay",
             "Blue Opal"
         ],
+        "quantity": {
+            "": 20,
+            "": 20
+        },
         "images": {
             "Clay": [
                 "https://media.everlane.com/images/c_fill,w_384,ar_4:5,q_auto,dpr_1.0,f_auto,fl_progressive:steep/i/0754b608_2e70/womens-organic-cotton-box-cut-tee-clay",
@@ -466,7 +499,6 @@
         "brand": "Adidas",
         "gender": "Male",
         "rating": 0,
-        "numberOfProduct": 50,
         "discount": 0,
         "price": 35.00,
         "size": [
@@ -490,6 +522,10 @@
             "Black",
             "Solid Grey"
         ],
+        "quantity": {
+            "": 20,
+            "": 20
+        },
         "images": {
             "Black": [
                 "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/2ca34e1d7e3e48ac9b3449cbbd62d81f_9366/Designed_for_Training_Workout_Tee_Black_IK9725_21_model.jpg",
@@ -510,7 +546,6 @@
         "brand": "Adidas",
         "gender": "Male",
         "rating": 0,
-        "numberOfProduct": 50,
         "discount": 0,
         "price": 30.00,
         "size": [
@@ -531,6 +566,10 @@
             "White",
             "Blue"
         ],
+        "quantity": {
+            "": 20,
+            "": 20
+        },
         "images": {
             "White": [
                 "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/7d7d0535ce1942418d2c2d053edc6f7a_9366/Trefoil_Essentials_Tee_White_IR9691_21_model.jpg",
@@ -550,7 +589,6 @@
         "brand": "Adidas",
         "gender": "Male",
         "rating": 0,
-        "numberOfProduct": 50,
         "discount": 0,
         "price": 35.00,
         "size": [
@@ -572,6 +610,10 @@
             "Black",
             "Red"
         ],
+        "quantity": {
+            "": 20,
+            "": 20
+        },
         "images": {
             "Black": [
                 "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/29b19794fa92419dbc6caf3b008ddf11_9366/Adicolor_Classics_3-Stripes_Tee_Black_IA4845_21_model.jpg",
@@ -592,7 +634,6 @@
         "brand": "Adidas",
         "gender": "Female",
         "rating": 0,
-        "numberOfProduct": 50,
         "discount": 0,
         "price": 35.00,
         "size": [
@@ -615,6 +656,10 @@
             "Tomato",
             "Bold Blue"
         ],
+        "quantity": {
+            "": 20,
+            "": 20
+        },
         "images": {
             "Tomato": [
                 "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/261d11114f2a4035b16287c839f071a4_9366/adidas_x_FARM_Rio_Graphic_Tee_Red_IQ4486_21_model.jpg",
@@ -635,7 +680,6 @@
         "brand": "Adidas",
         "gender": "Female",
         "rating": 0,
-        "numberOfProduct": 50,
         "discount": 0,
         "price": 35.00,
         "size": [
@@ -656,6 +700,10 @@
         "color": [
             "Cloud White"
         ],
+        "quantity": {
+            "": 20,
+            "": 20
+        },
         "images": {
             "Cloud White": [
                 "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/1df17f2211214e8380be0e977b63782f_9366/Fashion_Graphics_Floral_Trefoil_Tee_White_IS3870_21_model.jpg",
@@ -670,7 +718,6 @@
         "brand": "Adidas",
         "gender": "Female",
         "rating": 0,
-        "numberOfProduct": 50,
         "discount": 0,
         "price": 40.00,
         "size": [
@@ -691,6 +738,10 @@
         "color": [
             "Green"
         ],
+        "quantity": {
+            "": 20,
+            "": 20
+        },
         "images": {
             "Green": [
                 "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/a17ee0c737a7428987f493bcecc45996_9366/Adicolor_3-Stripes_Pinstripe_Tee_Green_IY7227_21_model.jpg",
@@ -705,7 +756,6 @@
         "brand": "Levis",
         "gender": "Male",
         "rating": 0,
-        "numberOfProduct": 50,
         "discount": 0,
         "price": 24.15,
         "size": [
@@ -729,6 +779,10 @@
         "color": [
             "Olive Green"
         ],
+        "quantity": {
+            "": 20,
+            "": 20
+        },
         "images": {
             "Olive Green": [
                 "https://lsco.scene7.com/is/image/lsco/A92460001-dynamic1-pdp?fmt=webp&qlt=70&resMode=bisharp&fit=crop,1&op_usm=0.6,0.6,8&wid=660&hei=660",
@@ -743,7 +797,6 @@
         "brand": "Levis",
         "gender": "Male",
         "rating": 0,
-        "numberOfProduct": 50,
         "discount": 0,
         "price": 24.15,
         "size": [
@@ -767,6 +820,10 @@
             "Stripe Heritage Blue",
             "Stripe Salsa Red"
         ],
+        "quantity": {
+            "": 20,
+            "": 20
+        },
         "images": {
             "Stripe Heritage Blue": [
                 "https://lsco.scene7.com/is/image/lsco/A33280075-dynamic1-pdp?fmt=webp&qlt=70&resMode=bisharp&fit=crop,1&op_usm=0.6,0.6,8&wid=660&hei=660",
@@ -787,7 +844,6 @@
         "brand": "Levis",
         "gender": "Female",
         "rating": 0,
-        "numberOfProduct": 50,
         "discount": 0,
         "price": 20.65,
         "size": [
@@ -811,6 +867,10 @@
             "Mineral Black",
             "Pale Peach"
         ],
+        "quantity": {
+            "": 20,
+            "": 20
+        },
         "images": {
             "Mineral Black": [
                 "https://lsco.scene7.com/is/image/lsco/376970001-dynamic1-pdp?fmt=webp&qlt=70&resMode=bisharp&fit=crop,1&op_usm=0.6,0.6,8&wid=660&hei=660",
@@ -831,7 +891,6 @@
         "brand": "Levis",
         "gender": "Female",
         "rating": 0,
-        "numberOfProduct": 50,
         "discount": 0,
         "price": 27.65,
         "size": [
@@ -852,6 +911,10 @@
         "color": [
             "Caviar Black"
         ],
+        "quantity": {
+            "": 20,
+            "": 20
+        },
         "images": {
             "Caviar Black": [
                 "https://lsco.scene7.com/is/image/lsco/A73200000-dynamic1-pdp?fmt=webp&qlt=70&resMode=bisharp&fit=crop,1&op_usm=0.6,0.6,8&wid=660&hei=660",
@@ -866,7 +929,6 @@
         "brand": "Nike",
         "gender": "Male",
         "rating": 0,
-        "numberOfProduct": 50,
         "discount": 0,
         "price": 35.00,
         "size": [
@@ -887,6 +949,10 @@
             "White",
             "Black"
         ],
+        "quantity": {
+            "": 20,
+            "": 20
+        },
         "images": {
             "White": [
                 "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/27b71476-6620-4387-8843-abd645c5abbc/dri-fit-mens-trail-running-t-shirt-pw5sc0.png",
@@ -907,7 +973,6 @@
         "brand": "Nike",
         "gender": "Male",
         "rating": 0,
-        "numberOfProduct": 50,
         "discount": 0,
         "price": 45.00,
         "size": [
@@ -928,6 +993,10 @@
             "Sea Green",
             "Light Blue"
         ],
+        "quantity": {
+            "": 20,
+            "": 20
+        },
         "images": {
             "Sea Green": [
                 "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/c6d27c9e-c87e-4524-9590-50f945430956/sportswear-premium-essentials-mens-t-shirt-mkhTvc.png",
@@ -948,7 +1017,6 @@
         "brand": "Nike",
         "gender": "Male",
         "rating": 0,
-        "numberOfProduct": 50,
         "discount": 0,
         "price": 45.00,
         "size": [
@@ -969,6 +1037,10 @@
             "White",
             "Blue"
         ],
+        "quantity": {
+            "": 20,
+            "": 20
+        },
         "images": {
             "White": [
                 "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/dc96d894-d028-451c-a7a4-005d005c097e/sportswear-mens-max90-t-shirt-CsjWZN.png",
@@ -989,7 +1061,6 @@
         "brand": "Nike",
         "gender": "Female",
         "rating": 0,
-        "numberOfProduct": 50,
         "discount": 0,
         "price": 35.00,
         "size": [
@@ -1009,6 +1080,10 @@
             "Light Armory Blue",
             "Light Carbon"
         ],
+        "quantity": {
+            "": 20,
+            "": 20
+        },
         "images": {
             "Light Armory Blue": [
                 "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/6493b195-41a8-4665-aafe-44249ec9017f/sportswear-chill-knit-womens-t-shirt-XFbdSG.png",
@@ -1029,7 +1104,6 @@
         "brand": "Nike",
         "gender": "Female",
         "rating": 0,
-        "numberOfProduct": 50,
         "discount": 0,
         "price": 45.00,
         "size": [
@@ -1050,6 +1124,10 @@
             "Daybreak Black",
             "Playful Pink"
         ],
+        "quantity": {
+            "": 20,
+            "": 20
+        },
         "images": {
             "Daybreak Black": [
                 "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/ad834c9f-f559-4349-a52a-5cec3ed63499/one-classic-womens-dri-fit-short-sleeve-cropped-top-H4198j.png",
@@ -1070,7 +1148,6 @@
         "brand": "Allen Solly",
         "gender": "Male",
         "rating": 0,
-        "numberOfProduct": 50,
         "discount": 0,
         "price": 26.52,
         "size": [
@@ -1091,6 +1168,10 @@
         "color": [
             "Green"
         ],
+        "quantity": {
+            "": 20,
+            "": 20
+        },
         "images": {
             "Green": [
                 "https://imagescdn.allensolly.com/img/app/product/3/39662512-13495099.jpg?q=75&auto=format&w=342",
@@ -1105,7 +1186,6 @@
         "brand": "Allen Solly",
         "gender": "Male",
         "rating": 0,
-        "numberOfProduct": 50,
         "discount": 0,
         "price": 30.31,
         "size": [
@@ -1126,6 +1206,10 @@
         "color": [
             "Navy"
         ],
+        "quantity": {
+            "": 20,
+            "": 20
+        },
         "images": {
             "Navy": [
                 "https://imagescdn.allensolly.com/img/app/product/3/39662505-13495050.jpg?q=75&auto=format&w=342",
@@ -1140,7 +1224,6 @@
         "brand": "Allen Solly",
         "gender": "Male",
         "rating": 0,
-        "numberOfProduct": 50,
         "discount": 0,
         "price": 25.00,
         "size": [
@@ -1160,6 +1243,10 @@
         "color": [
             "Light Blue"
         ],
+        "quantity": {
+            "": 20,
+            "": 20
+        },
         "images": {
             "Light Blue": [
                 "https://imagescdn.allensolly.com/img/app/product/3/39662466-13494775.jpg?q=75&auto=format&w=342",
@@ -1174,7 +1261,6 @@
         "brand": "Lacoste",
         "gender": "Male",
         "rating": 0,
-        "numberOfProduct": 50,
         "discount": 0,
         "price": 25.00,
         "size": [
@@ -1195,6 +1281,10 @@
         "color": [
             "White"
         ],
+        "quantity": {
+            "": 20,
+            "": 20
+        },
         "images": {
             "White": [
                 "https://image1.lacoste.com/dw/image/v2/AAQM_PRD/on/demandware.static/Sites-INT-Site/Sites-master/en/dw24251a89/TH7318_001_20.jpg?imwidth=915&impolicy=product",
@@ -1209,7 +1299,6 @@
         "brand": "Lacoste",
         "gender": "Male",
         "rating": 0,
-        "numberOfProduct": 50,
         "discount": 0,
         "price": 30.00,
         "size": [
@@ -1232,6 +1321,10 @@
             "Midnight Blue",
             "Black"
         ],
+        "quantity": {
+            "": 20,
+            "": 20
+        },
         "images": {
             "Midnight Blue": [
                 "https://image1.lacoste.com/dw/image/v2/AAQM_PRD/on/demandware.static/Sites-INT-Site/Sites-master/en/dwb636f198/TH6710_166_20.jpg?imwidth=915&impolicy=product",
@@ -1252,7 +1345,6 @@
         "brand": "Lacoste",
         "gender": "Female",
         "rating": 0,
-        "numberOfProduct": 50,
         "discount": 0,
         "price": 26.00,
         "size": [
@@ -1275,6 +1367,10 @@
             "White",
             "Black"
         ],
+        "quantity": {
+            "": 20,
+            "": 20
+        },
         "images": {
             "White": [
                 "https://image1.lacoste.com/dw/image/v2/AAQM_PRD/on/demandware.static/Sites-INT-Site/Sites-master/en/dwb3cce92d/TF1266_001_20.jpg?imwidth=915&impolicy=product",
@@ -1295,7 +1391,6 @@
         "brand": "Lacoste",
         "gender": "Female",
         "rating": 0,
-        "numberOfProduct": 50,
         "discount": 0,
         "price": 30.00,
         "size": [
@@ -1318,6 +1413,10 @@
             "Midnight Blue",
             "Pink"
         ],
+        "quantity": {
+            "": 20,
+            "": 20
+        },
         "images": {
             "Midnight Blue": [
                 "https://image1.lacoste.com/dw/image/v2/AAQM_PRD/on/demandware.static/Sites-INT-Site/Sites-master/en/dw154d078b/TF8392_166_20.jpg?imwidth=915&impolicy=product",
@@ -1338,7 +1437,6 @@
         "brand": "Buck Mason",
         "gender": "Male",
         "rating": 0,
-        "numberOfProduct": 50,
         "discount": 0,
         "price": 128.00,
         "size": [
@@ -1358,6 +1456,10 @@
         "color": [
             "Speckle Grey"
         ],
+        "quantity": {
+            "": 20,
+            "": 20
+        },
         "images": {
             "Speckle Grey": [
                 "https://cdn.shopify.com/s/files/1/0123/5065/2473/products/38_BM11049.583SGR_L59_22330_1200x.jpg?v=1695841979",
@@ -1372,7 +1474,6 @@
         "brand": "Buck Mason",
         "gender": "Male",
         "rating": 0,
-        "numberOfProduct": 50,
         "discount": 0,
         "price": 126.00,
         "size": [
@@ -1393,6 +1494,10 @@
             "Oat Field",
             "Dark Olive"
         ],
+        "quantity": {
+            "": 20,
+            "": 20
+        },
         "images": {
             "Oat Field": [
                 "https://cdn.shopify.com/s/files/1/0123/5065/2473/files/BM16199.812OFD_YUMA_RIB_BANDED_TEE_OAT_FIELD_1470_5f69ba82-864b-42c8-baa7-87aa8a2f7556_700x.jpg?v=1714779446",
@@ -1413,7 +1518,6 @@
         "brand": "Buck Mason",
         "gender": "Female",
         "rating": 0,
-        "numberOfProduct": 50,
         "discount": 0,
         "price": 118.00,
         "size": [
@@ -1434,6 +1538,10 @@
             "Natural",
             "Rockaway Sand"
         ],
+        "quantity": {
+            "": 20,
+            "": 20
+        },
         "images": {
             "Natural": [
                 "https://cdn.shopify.com/s/files/1/0123/5065/2473/files/75_BW16216.726NAT_SLUB_LINEN_SLOUCHY_TEE_NATURAL_04993_1200x.jpg?v=1714584147",

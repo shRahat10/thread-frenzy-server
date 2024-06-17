@@ -80,12 +80,12 @@ const tshirtSchema = new mongoose.Schema({
     gender: { type: String, required: true },
     rating: { type: Number, required: true },
     price: { type: Number, required: true },
-    numberOfProduct: { type: Number, required: true },
     discount: { type: Number, required: true },
     size: { type: Array, required: true },
     about_product: { type: String, required: true },
     details: { type: Array, required: true },
     color: { type: Array, required: true },
+    quantity: { type: Object, require: true },
     images: { type: Object, required: true },
     date: { type: Date, default: Date.now },
 })
@@ -259,10 +259,11 @@ app.post('/t-shirt', verifyToken('admin'), async (req, res) => {
 app.put('/t-shirt/:id', verifyToken(), async (req, res) => {
     try {
         const id = req.params.id;
-        const updatedTshirt = req.body;
+        const updatedProduct = req.body;
+
         const result = await Tshirt.findByIdAndUpdate(id,
             {
-                $set: updatedTshirt
+                $set: updatedProduct
             },
             {
                 new: true,
@@ -271,8 +272,7 @@ app.put('/t-shirt/:id', verifyToken(), async (req, res) => {
         );
 
         res.send(result);
-    }
-    catch (error) {
+    } catch (error) {
         res.status(500).send({
             success: false,
             error: error.message
