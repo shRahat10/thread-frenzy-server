@@ -536,12 +536,27 @@ app.delete('/user/:id', verifyToken('admin'), async (req, res) => {
 
 // Wishlist CRUD Operations
 app.get('/wishlist/:userId', verifyToken(), async (req, res) => {
+    const { page = 1, limit = 10 } = req.query;
+
     try {
+        const pageInt = parseInt(page);
+        const limitInt = parseInt(limit);
+
+        const totalItems = await Wishlist.countDocuments({ userId: req.params.userId });
+        const totalPages = Math.ceil(totalItems / limitInt);
         const wishlistItems = await Wishlist.find({ userId: req.params.userId })
             .populate('userId')
-            .populate('itemId');
+            .populate('itemId')
+            .sort({ date: -1 })
+            .skip((pageInt - 1) * limitInt)
+            .limit(limitInt);
 
-        res.send(wishlistItems);
+        res.send({
+            data: wishlistItems,
+            totalItems,
+            totalPages,
+            currentPage: pageInt,
+        });
     } catch (error) {
         console.error(error);
         res.status(500).send({ success: false, error: error.message });
