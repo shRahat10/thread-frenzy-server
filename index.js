@@ -232,10 +232,11 @@ app.get('/t-shirt', async (req, res) => {
     }
 });
 
-app.get('/t-shirt/men', async (req, res) => {
+const filterTshirts = async (req, res, next) => {
     const { brand, size, minPrice, maxPrice, page = 1, limit = 6 } = req.query;
+    const gender = req.path.includes('men') ? 'Male' : 'Female';
 
-    const filters = { gender: 'Male' };
+    const filters = { gender };
     if (brand) filters.brand = { $in: brand.split(',') };
     if (size) filters.size = { $in: size.split(',') };
     if (minPrice) filters.price = { $gte: parseFloat(minPrice) };
@@ -248,48 +249,28 @@ app.get('/t-shirt/men', async (req, res) => {
 
         const allFilteredItems = await Tshirt.find(filters).skip(skip).limit(parseInt(limit));
 
-        res.send({
+        req.tshirtData = {
             data: allFilteredItems,
             totalItems,
             totalPages,
             currentPage: parseInt(page),
-        });
+        };
+
+        next();
     } catch (error) {
         res.status(500).send({
             success: false,
             error: error.message
         });
     }
+};
+
+app.get('/t-shirt/men', filterTshirts, (req, res) => {
+    res.send(req.tshirtData);
 });
 
-app.get('/t-shirt/women', async (req, res) => {
-    const { brand, size, minPrice, maxPrice, page = 1, limit = 6 } = req.query;
-
-    const filters = { gender: 'Female' };
-    if (brand) filters.brand = { $in: brand.split(',') };
-    if (size) filters.size = { $in: size.split(',') };
-    if (minPrice) filters.price = { $gte: parseFloat(minPrice) };
-    if (maxPrice) filters.price = { $lte: parseFloat(maxPrice) };
-
-    try {
-        const totalItems = await Tshirt.countDocuments(filters);
-        const totalPages = Math.ceil(totalItems / limit);
-        const skip = (page - 1) * limit;
-
-        const allFilteredItems = await Tshirt.find(filters).skip(skip).limit(parseInt(limit));
-
-        res.send({
-            data: allFilteredItems,
-            totalItems,
-            totalPages,
-            currentPage: parseInt(page),
-        });
-    } catch (error) {
-        res.status(500).send({
-            success: false,
-            error: error.message
-        });
-    }
+app.get('/t-shirt/women', filterTshirts, (req, res) => {
+    res.send(req.tshirtData);
 });
 
 app.get('/t-shirt/:id', verifyToken(), async (req, res) => {
@@ -428,29 +409,42 @@ app.delete('/cart', verifyToken(), async (req, res) => {
 });
 
 // User CRUD Operations
-app.get('/user', verifyToken('admin'), async (req, res) => {
-    try {
-        const activeUsers = await User.find({ status: 'active' });
-        res.send(activeUsers);
-    } catch (error) {
-        res.status(500).send({
-            success: false,
-            error: error.message
-        });
-    }
-});
+const getUsers = async (filter, page, limit, sort = { date: -1 }) => {
+    const pageInt = parseInt(page);
+    const limitInt = parseInt(limit);
 
-app.get('/user/banned', verifyToken('admin'), async (req, res) => {
+    const totalItems = await User.countDocuments(filter);
+    const totalPages = Math.ceil(totalItems / limitInt);
+    const users = await User.find(filter)
+        .sort(sort)
+        .skip((pageInt - 1) * limitInt)
+        .limit(limitInt);
+
+    return { users, totalItems, totalPages, currentPage: pageInt };
+};
+
+// Middleware to handle user fetching
+const handleGetUsers = (filter) => async (req, res) => {
+    const { page = 1, limit = 5 } = req.query;
     try {
-        const bannedUsers = await User.find({ status: 'banned' });
-        res.send(bannedUsers);
+        const result = await getUsers(filter, page, limit);
+        res.send({
+            data: result.users,
+            totalItems: result.totalItems,
+            totalPages: result.totalPages,
+            currentPage: result.currentPage,
+        });
     } catch (error) {
         res.status(500).send({
             success: false,
-            error: error.message
+            error: error.message,
         });
     }
-});
+};
+
+app.get('/user', verifyToken('admin'), handleGetUsers({ status: 'active', role: 'user' }));
+app.get('/user/admin', verifyToken('admin'), handleGetUsers({ status: 'active', role: 'admin' }));
+app.get('/user/banned', verifyToken('admin'), handleGetUsers({ status: 'banned' }));
 
 app.get('/user/:userEmail', verifyToken(), async (req, res) => {
     try {
