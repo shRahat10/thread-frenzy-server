@@ -620,9 +620,25 @@ app.post('/create-payment-intent', async (req, res) => {
 
 // payment CRUD operations
 app.get('/payment', verifyToken('admin'), async (req, res) => {
+    const { page = 1, limit = 10 } = req.query;
+
     try {
-        const paymentItems = await Payment.find();
-        res.send(paymentItems);
+        const pageInt = parseInt(page);
+        const limitInt = parseInt(limit);
+
+        const totalItems = await Payment.countDocuments();
+        const totalPages = Math.ceil(totalItems / limitInt);
+        const paymentItems = await Payment.find()
+            .sort({ date: -1 })
+            .skip((pageInt - 1) * limitInt)
+            .limit(limitInt);
+
+        res.send({
+            data: paymentItems,
+            totalItems,
+            totalPages,
+            currentPage: pageInt,
+        });
     } catch (error) {
         console.error(error);
         res.status(500).send({ success: false, error: error.message });
