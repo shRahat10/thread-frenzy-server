@@ -640,9 +640,25 @@ app.get('/payment', verifyToken('admin'), async (req, res) => {
 });
 
 app.get('/payment/:email', verifyToken(), async (req, res) => {
+    const { page = 1, limit = 10 } = req.query;
+
     try {
-        const paymentItems = await Payment.find({ email: req.params.email });
-        res.send(paymentItems);
+        const pageInt = parseInt(page);
+        const limitInt = parseInt(limit);
+
+        const totalItems = await Payment.countDocuments({ email: req.params.email });
+        const totalPages = Math.ceil(totalItems / limitInt);
+        const paymentItems = await Payment.find({ email: req.params.email })
+            .sort({ date: -1 })
+            .skip((pageInt - 1) * limitInt)
+            .limit(limitInt);
+
+        res.send({
+            data: paymentItems,
+            totalItems,
+            totalPages,
+            currentPage: pageInt,
+        });
     } catch (error) {
         console.error(error);
         res.status(500).send({ success: false, error: error.message });
