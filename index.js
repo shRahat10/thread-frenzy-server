@@ -667,6 +667,16 @@ app.post('/create-payment-intent', async (req, res) => {
 });
 
 // payment CRUD operations
+app.get('/payment-all', verifyToken('admin'), async (req, res) => {
+    try {
+        const paymentItems = await Payment.find();
+        res.send(paymentItems);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send({ success: false, error: error.message });
+    }
+});
+
 app.get('/payment', verifyToken('admin'), async (req, res) => {
     const { page = 1, limit = 10 } = req.query;
 
