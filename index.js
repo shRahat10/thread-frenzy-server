@@ -536,7 +536,7 @@ app.delete('/user/:id', verifyToken('admin'), async (req, res) => {
 
 // Wishlist CRUD Operations
 app.get('/wishlist/:userId', verifyToken(), async (req, res) => {
-    const { page = 1, limit = 10 } = req.query;
+    const { page = 1, limit = 6 } = req.query;
 
     try {
         const pageInt = parseInt(page);
@@ -557,6 +557,19 @@ app.get('/wishlist/:userId', verifyToken(), async (req, res) => {
             totalPages,
             currentPage: pageInt,
         });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send({ success: false, error: error.message });
+    }
+});
+
+app.get('/wishlist-all/:userId', verifyToken(), async (req, res) => {
+    try {
+        const wishlistItems = await Wishlist.find({ userId: req.params.userId })
+            .populate('userId')
+            .populate('itemId');
+
+        res.send({ success: true, data: wishlistItems });
     } catch (error) {
         console.error(error);
         res.status(500).send({ success: false, error: error.message });
@@ -725,6 +738,16 @@ app.put('/payment/:id', verifyToken('admin'), async (req, res) => {
 });
 
 // product review CRUD operations
+app.get('/review-all/:productId', verifyToken(), async (req, res) => {
+    try {
+        const reviews = await Review.find({ productId: req.params.productId });
+        res.send(reviews);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send({ success: false, error: error.message });
+    }
+});
+
 app.get('/review/:productId', verifyToken(), async (req, res) => {
     try {
         const reviews = await Review.find({ productId: req.params.productId });
@@ -780,9 +803,25 @@ app.delete('/review/:id', verifyToken(), async (req, res) => {
 
 // contact us CRUD operations
 app.get('/contact-us', verifyToken('admin'), async (req, res) => {
+    const { page = 1, limit = 6 } = req.query;
+
     try {
-        const messages = await Message.find();
-        res.send(messages);
+        const pageInt = parseInt(page);
+        const limitInt = parseInt(limit);
+
+        const totalItems = await Message.countDocuments();
+        const totalPages = Math.ceil(totalItems / limitInt);
+        const messageItems = await Message.find()
+            .sort({ date: -1 })
+            .skip((pageInt - 1) * limitInt)
+            .limit(limitInt);
+
+        res.send({
+            data: messageItems,
+            totalItems,
+            totalPages,
+            currentPage: pageInt,
+        });
     } catch (error) {
         console.error(error);
         res.status(500).send({ success: false, error: error.message });
