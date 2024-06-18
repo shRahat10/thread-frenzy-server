@@ -192,6 +192,18 @@ app.post("/logout", (req, res) => {
 
 // Data CRUD Operations
 
+app.get('/t-shirt-all', async (req, res) => {
+    try {
+        const allFilteredItems = await Tshirt.find()
+        res.send({ data: allFilteredItems });
+    } catch (error) {
+        res.status(500).send({
+            success: false,
+            error: error.message
+        });
+    }
+});
+
 app.get('/t-shirt', async (req, res) => {
     const { brand, gender, sort, page = 1, limit = 6 } = req.query;
 
