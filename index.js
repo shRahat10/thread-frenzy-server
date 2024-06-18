@@ -232,9 +232,8 @@ app.get('/t-shirt', async (req, res) => {
     }
 });
 
-const filterTshirts = async (req, res, next) => {
+const filterTshirts = (gender) => async (req, res, next) => {
     const { brand, size, minPrice, maxPrice, page = 1, limit = 6 } = req.query;
-    const gender = req.path.includes('men') ? 'Male' : 'Female';
 
     const filters = { gender };
     if (brand) filters.brand = { $in: brand.split(',') };
@@ -266,11 +265,11 @@ const filterTshirts = async (req, res, next) => {
     }
 };
 
-app.get('/t-shirt/men', filterTshirts, (req, res) => {
+app.get('/t-shirt/men', filterTshirts('Male'), (req, res) => {
     res.send(req.tshirtData);
 });
 
-app.get('/t-shirt/women', filterTshirts, (req, res) => {
+app.get('/t-shirt/women', filterTshirts('Female'), (req, res) => {
     res.send(req.tshirtData);
 });
 
