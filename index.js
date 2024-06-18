@@ -191,6 +191,7 @@ app.post("/logout", (req, res) => {
 });
 
 // Data CRUD Operations
+
 app.get('/t-shirt', async (req, res) => {
     const { brand, gender, sort, page = 1, limit = 6 } = req.query;
 
@@ -224,6 +225,19 @@ app.get('/t-shirt', async (req, res) => {
             totalPages,
             currentPage: pageInt,
         });
+    } catch (error) {
+        res.status(500).send({
+            success: false,
+            error: error.message
+        });
+    }
+});
+
+app.get('/t-shirt/similar-product', async (req, res) => {
+    const { brand } = req.query;
+    try {
+        const similarProducts = await Tshirt.find({ brand });
+        res.send({ data: similarProducts });
     } catch (error) {
         res.status(500).send({
             success: false,
