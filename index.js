@@ -749,9 +749,25 @@ app.get('/review-all/:productId', verifyToken(), async (req, res) => {
 });
 
 app.get('/review/:productId', verifyToken(), async (req, res) => {
+    const { page = 1, limit = 3 } = req.query;
+
     try {
-        const reviews = await Review.find({ productId: req.params.productId });
-        res.send(reviews);
+        const pageInt = parseInt(page);
+        const limitInt = parseInt(limit);
+
+        const totalItems = await Review.countDocuments({ productId: req.params.productId });
+        const totalPages = Math.ceil(totalItems / limitInt);
+        const reviewItems = await Review.find({ productId: req.params.productId })
+            .sort({ date: -1 })
+            .skip((pageInt - 1) * limitInt)
+            .limit(limitInt);
+
+        res.send({
+            data: reviewItems,
+            totalItems,
+            totalPages,
+            currentPage: pageInt,
+        });
     } catch (error) {
         console.error(error);
         res.status(500).send({ success: false, error: error.message });
