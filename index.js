@@ -438,6 +438,18 @@ const getUsers = async (filter, page, limit, sort = { date: -1 }) => {
 };
 
 // Middleware to handle user fetching
+app.get('/user-all', verifyToken('admin'), async (req, res) => {
+    try {
+        const activeUsers = await User.find({ status: 'active' });
+        res.send(activeUsers);
+    } catch (error) {
+        res.status(500).send({
+            success: false,
+            error: error.message
+        });
+    }
+});
+
 const handleGetUsers = (filter) => async (req, res) => {
     const { page = 1, limit = 5 } = req.query;
     try {
