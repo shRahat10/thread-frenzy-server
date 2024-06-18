@@ -192,21 +192,12 @@ app.post("/logout", (req, res) => {
 
 // Data CRUD Operations
 app.get('/t-shirt', async (req, res) => {
-    const { brand, price, size, gender, sort, page = 1, limit = 6 } = req.query;
+    const { brand, gender, sort, page = 1, limit = 6 } = req.query;
 
     const filters = {};
 
     if (brand) {
         filters.brand = { $in: brand.split(',') };
-    }
-
-    if (price) {
-        const [minPrice, maxPrice] = price.split(',').map(Number);
-        filters.price = { $gte: minPrice, $lte: maxPrice };
-    }
-
-    if (size) {
-        filters.size = { $in: size.split(',') };
     }
 
     if (gender) {
@@ -242,39 +233,26 @@ app.get('/t-shirt', async (req, res) => {
 });
 
 app.get('/t-shirt/men', async (req, res) => {
-    const { brand, price, size, sort, page = 1, limit = 6 } = req.query;
+    const { brand, size, minPrice, maxPrice, page = 1, limit = 6 } = req.query;
 
     const filters = { gender: 'Male' };
-
-    if (brand) {
-        filters.brand = { $in: brand.split(',') };
-    }
-
-    if (price) {
-        const [minPrice, maxPrice] = price.split(',').map(Number);
-        filters.price = { $gte: minPrice, $lte: maxPrice };
-    }
-
-    if (size) {
-        filters.size = { $in: size.split(',') };
-    }
+    if (brand) filters.brand = { $in: brand.split(',') };
+    if (size) filters.size = { $in: size.split(',') };
+    if (minPrice) filters.price = { $gte: parseFloat(minPrice) };
+    if (maxPrice) filters.price = { $lte: parseFloat(maxPrice) };
 
     try {
-        const allFilteredItems = await Tshirt.find(filters);
-
-        const totalItems = allFilteredItems.length;
+        const totalItems = await Tshirt.countDocuments(filters);
         const totalPages = Math.ceil(totalItems / limit);
+        const skip = (page - 1) * limit;
 
-        const pageInt = parseInt(page);
-        const limitInt = parseInt(limit);
-        const startIndex = (pageInt - 1) * limitInt;
-        const paginatedItems = allFilteredItems.slice(startIndex, startIndex + limitInt);
+        const allFilteredItems = await Tshirt.find(filters).skip(skip).limit(parseInt(limit));
 
         res.send({
-            data: paginatedItems,
+            data: allFilteredItems,
             totalItems,
             totalPages,
-            currentPage: pageInt,
+            currentPage: parseInt(page),
         });
     } catch (error) {
         res.status(500).send({
@@ -285,39 +263,26 @@ app.get('/t-shirt/men', async (req, res) => {
 });
 
 app.get('/t-shirt/women', async (req, res) => {
-    const { brand, price, size, sort, page = 1, limit = 6 } = req.query;
+    const { brand, size, minPrice, maxPrice, page = 1, limit = 6 } = req.query;
 
     const filters = { gender: 'Female' };
-
-    if (brand) {
-        filters.brand = { $in: brand.split(',') };
-    }
-
-    if (price) {
-        const [minPrice, maxPrice] = price.split(',').map(Number);
-        filters.price = { $gte: minPrice, $lte: maxPrice };
-    }
-
-    if (size) {
-        filters.size = { $in: size.split(',') };
-    }
+    if (brand) filters.brand = { $in: brand.split(',') };
+    if (size) filters.size = { $in: size.split(',') };
+    if (minPrice) filters.price = { $gte: parseFloat(minPrice) };
+    if (maxPrice) filters.price = { $lte: parseFloat(maxPrice) };
 
     try {
-        const allFilteredItems = await Tshirt.find(filters);
-
-        const totalItems = allFilteredItems.length;
+        const totalItems = await Tshirt.countDocuments(filters);
         const totalPages = Math.ceil(totalItems / limit);
+        const skip = (page - 1) * limit;
 
-        const pageInt = parseInt(page);
-        const limitInt = parseInt(limit);
-        const startIndex = (pageInt - 1) * limitInt;
-        const paginatedItems = allFilteredItems.slice(startIndex, startIndex + limitInt);
+        const allFilteredItems = await Tshirt.find(filters).skip(skip).limit(parseInt(limit));
 
         res.send({
-            data: paginatedItems,
+            data: allFilteredItems,
             totalItems,
             totalPages,
-            currentPage: pageInt,
+            currentPage: parseInt(page),
         });
     } catch (error) {
         res.status(500).send({
