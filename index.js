@@ -239,8 +239,9 @@ const filterTshirts = async (req, res, next) => {
     const filters = { gender };
     if (brand) filters.brand = { $in: brand.split(',') };
     if (size) filters.size = { $in: size.split(',') };
-    if (minPrice) filters.price = { $gte: parseFloat(minPrice) };
-    if (maxPrice) filters.price = { $lte: parseFloat(maxPrice) };
+    if (minPrice) filters.price = { ...filters.price, $gte: parseFloat(minPrice) };
+    if (maxPrice) filters.price = { ...filters.price, $lte: parseFloat(maxPrice) };
+
 
     try {
         const totalItems = await Tshirt.countDocuments(filters);
