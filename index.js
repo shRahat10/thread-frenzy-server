@@ -449,7 +449,6 @@ const getUsers = async (filter, page, limit, sort = { date: -1 }) => {
     return { users, totalItems, totalPages, currentPage: pageInt };
 };
 
-// Middleware to handle user fetching
 app.get('/user-all', verifyToken('admin'), async (req, res) => {
     try {
         const activeUsers = await User.find({ status: 'active' });
@@ -462,6 +461,7 @@ app.get('/user-all', verifyToken('admin'), async (req, res) => {
     }
 });
 
+// Middleware to handle user fetching
 const handleGetUsers = (filter) => async (req, res) => {
     const { page = 1, limit = 5 } = req.query;
     try {
