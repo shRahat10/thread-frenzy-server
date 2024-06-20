@@ -2,7 +2,7 @@ const wishlistService = require("../../services/v1/wishlist.service");
 
 exports.getAllWishlist = async (req, res, next) => {
     try {
-        await userService.getAllWishlist(req, res, next);
+        await wishlistService.getAllWishlist(req, res, next);
     } catch (error) {
         next(error);
     } finally {
@@ -12,7 +12,7 @@ exports.getAllWishlist = async (req, res, next) => {
 
 exports.getUserWishlist = async (req, res, next) => {
     try {
-        await userService.getUserWishlist(req, res, next);
+        await wishlistService.getUserWishlist(req, res, next);
     } catch (error) {
         next(error);
     } finally {
@@ -22,7 +22,7 @@ exports.getUserWishlist = async (req, res, next) => {
 
 exports.postWishlist = async (req, res, next) => {
     try {
-        await userService.postWishlist(req, res, next);
+        await wishlistService.postWishlist(req, res, next);
     } catch (error) {
         next(error);
     } finally {
@@ -32,7 +32,7 @@ exports.postWishlist = async (req, res, next) => {
 
 exports.deleteWishlist = async (req, res, next) => {
     try {
-        await userService.deleteWishlist(req, res, next);
+        await wishlistService.deleteWishlist(req, res, next);
     } catch (error) {
         next(error);
     } finally {
