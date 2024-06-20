@@ -25,12 +25,12 @@ app.use(cookieParser());
 app.use(cors({
     origin: [
         'http://localhost:5173',
-        'https://study-buddies-7ea63.web.app',
-        'https://study-buddies-7ea63.firebaseapp.com'
+        'https://thread-frenzy.web.app',
+        'https://thread-frenzy.firebaseapp.com',
     ],
     credentials: true
 }));
-// http://localhost:5000/v1/api/user/user-all
+
 app.use("/v1/api", userRoute);
 app.use("/v1/api", tshirtRoute);
 app.use("/v1/api", cartRoute);
