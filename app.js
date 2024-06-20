@@ -16,7 +16,6 @@ const reviewRoute = require("./routes/v1/review.route");
 const wishlistRoute = require("./routes/v1/wishlist.route");
 const messageRoute = require("./routes/v1/message.route");
 const jwtRoute = require("./routes/v1/jwt.route");
-const banUserRoute = require("./routes/v1/banUser.route");
 
 // application level connection 
 const app = express();
@@ -41,7 +40,6 @@ app.use("/v1/api", reviewRoute);
 app.use("/v1/api", wishlistRoute);
 app.use("/v1/api", messageRoute);
 app.use("/v1/api", jwtRoute);
-app.use("/v1/api", banUserRoute);
 
 // global error handler 
 app.use(error);
