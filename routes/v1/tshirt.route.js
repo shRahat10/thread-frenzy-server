@@ -12,7 +12,7 @@ router.get("/t-shirt/:gender", tshirtController.getGenderSpecificTshirt);
 router.get("/t-shirt/similar-products/:brand", tshirtController.getSimilarTshirt);
 router.get("/t-shirt/single-product/:id", verifyToken(), tshirtController.getSingleTshirt);
 router.post("/t-shirt", verifyToken('admin'), tshirtController.postTshirt);
-router.put("/t-shirt/:id", verifyToken('admin'), tshirtController.putTshirt);
+router.put("/t-shirt/:id", verifyToken(), tshirtController.putTshirt);
 router.delete("/t-shirt/:id", verifyToken('admin'), tshirtController.deleteTshirt);
 
 module.exports = router;
