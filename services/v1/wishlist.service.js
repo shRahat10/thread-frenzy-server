@@ -1,4 +1,6 @@
 const Wishlist = require("../../models/v1/wishlist.model");
+const Tshirt = require("../../models/v1/tshirt.model");
+const User = require("../../models/v1/user.model");
 
 exports.getAllWishlist = async (req, res, next) => {
     try {
