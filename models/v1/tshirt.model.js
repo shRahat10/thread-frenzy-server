@@ -5,7 +5,6 @@ const tshirtSchema = new mongoose.Schema({
     name: { type: String, required: true },
     brand: { type: String, required: true },
     gender: { type: String, required: true },
-    rating: { type: Number, required: true },
     price: { type: Number, required: true },
     discount: { type: Number, required: true },
     size: { type: Array, required: true },

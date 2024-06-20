@@ -241,8 +241,9 @@ app.get('/t-shirt', async (req, res, next) => {
 
 app.get('/t-shirt/similar-product', async (req, res, next) => {
     const { brand } = req.query;
+    const filters = { brand };
     try {
-        const similarProducts = await Tshirt.find({ brand });
+        const similarProducts = await Tshirt.find(filters);
         res.send({ data: similarProducts });
     } catch (error) {
         res.status(500).send({

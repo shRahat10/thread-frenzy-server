@@ -86,11 +86,11 @@ exports.getGenderSpecificTshirt = async (req, res, next) => {
     }
 }
 
-exports.getSimilartTshirt = async (req, res, next) => {
-    const { brand } = req.query;
+exports.getSimilarTshirt = async (req, res, next) => {
     try {
-        const similarProducts = await Tshirt.find({ brand });
-        res.send({ data: similarProducts });
+        const brand = req.params.brand;
+        const similarProducts = await Tshirt.find({ brand: brand });
+        res.send(similarProducts);
     } catch (error) {
         res.status(500).send({
             success: false,

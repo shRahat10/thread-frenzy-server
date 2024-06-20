@@ -30,9 +30,9 @@ exports.getGenderSpecificTshirt = async (req, res, next) => {
     }
 };
 
-exports.getSimilartTshirt = async (req, res, next) => {
+exports.getSimilarTshirt = async (req, res, next) => {
     try {
-        await tshirtService.getSimilartTshirt(req, res, next);
+        await tshirtService.getSimilarTshirt(req, res, next);
     } catch (error) {
         next(error);
     } finally {
