@@ -3,8 +3,7 @@
         "name": "Framed Flower Graphic Classic Crew neck T-Shirt",
         "brand": "Calvin Klein",
         "gender": "Male",
-        "rating": 0,
-        "discount": 0,
+        "discount": 10,
         "price": 39.92,
         "size": [
             "s",
@@ -49,7 +48,6 @@
         "name": "Monogram Logo Crew neck T-Shirt",
         "brand": "Calvin Klein",
         "gender": "Male",
-        "rating": 0,
         "discount": 0,
         "price": 31.20,
         "size": [
@@ -94,8 +92,7 @@
         "name": "Supima Cotton Crew neck T-Shirt",
         "brand": "Calvin Klein",
         "gender": "Male",
-        "rating": 0,
-        "discount": 0,
+        "discount": 30,
         "price": 47.20,
         "size": [
             "s",
@@ -142,7 +139,6 @@
         "name": "Contrast Monogram Logo Slim Fit Crew neck T-Shirt",
         "brand": "Calvin Klein",
         "gender": "Female",
-        "rating": 0,
         "discount": 0,
         "price": 32.62,
         "size": [
@@ -188,7 +184,6 @@
         "name": "Gradient Logo Slim Fit Crew neck T-Shirt",
         "brand": "Calvin Klein",
         "gender": "Female",
-        "rating": 0,
         "discount": 0,
         "price": 31.20,
         "size": [
@@ -234,8 +229,7 @@
         "name": "The Premium-Weight Relaxed Crew",
         "brand": "Everlane",
         "gender": "Male",
-        "rating": 0,
-        "discount": 0,
+        "discount": 20,
         "price": 40.60,
         "size": [
             "s",
@@ -278,8 +272,7 @@
         "name": "The Essential Organic Crew",
         "brand": "Everlane",
         "gender": "Male",
-        "rating": 0,
-        "discount": 0,
+        "discount": 50,
         "price": 27.60,
         "size": [
             "s",
@@ -321,7 +314,6 @@
         "name": "The No-Sweat Polo",
         "brand": "Everlane",
         "gender": "Male",
-        "rating": 0,
         "discount": 0,
         "price": 71.20,
         "size": [
@@ -365,7 +357,6 @@
         "name": "The Organic Cotton Slim V-Neck Tee",
         "brand": "Everlane",
         "gender": "Female",
-        "rating": 0,
         "discount": 0,
         "price": 27.20,
         "size": [
@@ -409,8 +400,7 @@
         "name": "The Organic Cotton Muscle Tee",
         "brand": "Everlane",
         "gender": "Female",
-        "rating": 0,
-        "discount": 0,
+        "discount": 50,
         "price": 31.80,
         "size": [
             "s",
@@ -453,7 +443,6 @@
         "name": "The Organic Cotton Box-Cut Tee",
         "brand": "Everlane",
         "gender": "Female",
-        "rating": 0,
         "discount": 0,
         "price": 27.20,
         "size": [
@@ -498,7 +487,6 @@
         "name": "Designed For Training Workout Tee",
         "brand": "Adidas",
         "gender": "Male",
-        "rating": 0,
         "discount": 0,
         "price": 35.00,
         "size": [
@@ -545,8 +533,7 @@
         "name": "Trefoil Essentials Tee",
         "brand": "Adidas",
         "gender": "Male",
-        "rating": 0,
-        "discount": 0,
+        "discount": 10,
         "price": 30.00,
         "size": [
             "s",
@@ -588,7 +575,6 @@
         "name": "Adicolor Classics 3-Stripes Tee",
         "brand": "Adidas",
         "gender": "Male",
-        "rating": 0,
         "discount": 0,
         "price": 35.00,
         "size": [
@@ -633,8 +619,7 @@
         "name": "Adidas X Farm Rio Grahic Tee",
         "brand": "Adidas",
         "gender": "Female",
-        "rating": 0,
-        "discount": 0,
+        "discount": 12,
         "price": 35.00,
         "size": [
             "s",
@@ -679,7 +664,6 @@
         "name": "Fashion Graphics Floral Trefoil Tee",
         "brand": "Adidas",
         "gender": "Female",
-        "rating": 0,
         "discount": 0,
         "price": 35.00,
         "size": [
@@ -716,7 +700,6 @@
         "name": "Adicolor 3-Stripes Pinstripe Tee",
         "brand": "Adidas",
         "gender": "Female",
-        "rating": 0,
         "discount": 0,
         "price": 40.00,
         "size": [
@@ -753,7 +736,6 @@
         "name": "Short Sleeve Retro Ringer",
         "brand": "Levis",
         "gender": "Male",
-        "rating": 0,
         "discount": 0,
         "price": 24.15,
         "size": [
@@ -793,7 +775,6 @@
         "name": "Essential T-shirt",
         "brand": "Levis",
         "gender": "Male",
-        "rating": 0,
         "discount": 0,
         "price": 24.15,
         "size": [
@@ -840,8 +821,7 @@
         "name": "Short Sleeve Rib Baby T-shirt",
         "brand": "Levis",
         "gender": "Female",
-        "rating": 0,
-        "discount": 0,
+        "discount": 20,
         "price": 20.65,
         "size": [
             "s",
@@ -887,7 +867,6 @@
         "name": "Dreamy Short Sleeve",
         "brand": "Levis",
         "gender": "Female",
-        "rating": 0,
         "discount": 0,
         "price": 27.65,
         "size": [
@@ -924,7 +903,6 @@
         "name": "Nike Dri-FIT",
         "brand": "Nike",
         "gender": "Male",
-        "rating": 0,
         "discount": 0,
         "price": 35.00,
         "size": [
@@ -968,7 +946,6 @@
         "name": "Nike Sportswear Premium Essentials",
         "brand": "Nike",
         "gender": "Male",
-        "rating": 0,
         "discount": 0,
         "price": 45.00,
         "size": [
@@ -1012,7 +989,6 @@
         "name": "Nike Sportswear",
         "brand": "Nike",
         "gender": "Male",
-        "rating": 0,
         "discount": 0,
         "price": 45.00,
         "size": [
@@ -1056,8 +1032,7 @@
         "name": "Nike Sportswear Chill Knit",
         "brand": "Nike",
         "gender": "Female",
-        "rating": 0,
-        "discount": 0,
+        "discount": 10,
         "price": 35.00,
         "size": [
             "s",
@@ -1099,7 +1074,6 @@
         "name": "Nike One Classic",
         "brand": "Nike",
         "gender": "Female",
-        "rating": 0,
         "discount": 0,
         "price": 45.00,
         "size": [
@@ -1143,8 +1117,7 @@
         "name": "Green Solid Crew Neck T-Shirt",
         "brand": "Allen Solly",
         "gender": "Male",
-        "rating": 0,
-        "discount": 0,
+        "discount": 10,
         "price": 26.52,
         "size": [
             "s",
@@ -1180,7 +1153,6 @@
         "name": "Navy Solid Crew Neck T-Shirt",
         "brand": "Allen Solly",
         "gender": "Male",
-        "rating": 0,
         "discount": 0,
         "price": 30.31,
         "size": [
@@ -1217,7 +1189,6 @@
         "name": "Blue Print Crew Neck Printed T-Shirt",
         "brand": "Allen Solly",
         "gender": "Male",
-        "rating": 0,
         "discount": 0,
         "price": 25.00,
         "size": [
@@ -1253,7 +1224,6 @@
         "name": "Classic Fit Cotton Jersey",
         "brand": "Lacoste",
         "gender": "Male",
-        "rating": 0,
         "discount": 0,
         "price": 25.00,
         "size": [
@@ -1290,8 +1260,7 @@
         "name": "V Neck Cotton Pima T-Shirt",
         "brand": "Lacoste",
         "gender": "Male",
-        "rating": 0,
-        "discount": 0,
+        "discount": 15,
         "price": 30.00,
         "size": [
             "s",
@@ -1336,7 +1305,6 @@
         "name": "Slim Fit Crew Neck Cotton Blend T-shirt",
         "brand": "Lacoste",
         "gender": "Female",
-        "rating": 0,
         "discount": 0,
         "price": 26.00,
         "size": [
@@ -1382,7 +1350,6 @@
         "name": "V Neck Loose Fit Cotton T-shirt",
         "brand": "Lacoste",
         "gender": "Female",
-        "rating": 0,
         "discount": 0,
         "price": 30.00,
         "size": [
@@ -1428,8 +1395,7 @@
         "name": "Field Spec Cotton Heavy Tee",
         "brand": "Buck Mason",
         "gender": "Male",
-        "rating": 0,
-        "discount": 0,
+        "discount": 10,
         "price": 128.00,
         "size": [
             "s",
@@ -1464,7 +1430,6 @@
         "name": "Yuma Rib Banded Tee",
         "brand": "Buck Mason",
         "gender": "Male",
-        "rating": 0,
         "discount": 0,
         "price": 126.00,
         "size": [
@@ -1508,7 +1473,6 @@
         "name": "Slub Linen Slouchy Tee",
         "brand": "Buck Mason",
         "gender": "Female",
-        "rating": 0,
         "discount": 0,
         "price": 118.00,
         "size": [
