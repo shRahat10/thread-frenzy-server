@@ -68,7 +68,7 @@ exports.getGenderSpecificTshirt = async (req, res, next) => {
     try {
         const totalItems = await Tshirt.countDocuments(filters);
         const totalPages = Math.ceil(totalItems / limit);
-        const skip = (page - 1) * limit;
+        const skip = (parseInt(page) - 1) * parseInt(limit);
 
         const allFilteredItems = await Tshirt.find(filters).skip(skip).limit(parseInt(limit));
 
