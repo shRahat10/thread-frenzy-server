@@ -31,7 +31,7 @@ exports.getSpecificUsers = async (req, res, next) => {
         const totalItems = await User.countDocuments(filter);
         const totalPages = Math.ceil(totalItems / limitInt);
         const users = await User.find(filter)
-            .sort({ createdAt: -1 })
+            .sort({ date: -1 })
             .skip((pageInt - 1) * limitInt)
             .limit(limitInt);
 
